@@ -358,7 +358,7 @@ GameObject:
   - component: {fileID: 589246547}
   - component: {fileID: 589246546}
   m_Layer: 0
-  m_Name: car_sprite_3quarter_rear_0
+  m_Name: Car
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
