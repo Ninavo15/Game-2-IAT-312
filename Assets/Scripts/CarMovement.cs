@@ -16,7 +16,7 @@ public class CarMovement : MonoBehaviour
     private void FixedUpdate()
     {
         Vector2 nextVec = new Vector2(
-            inputVec.x * lateralSpeed,   // side to side
+            inputVec.x * lateralSpeed,   // side to side 
             inputVec.y * speed            // forward / back
         ) * Time.fixedDeltaTime;
         rb.MovePosition(rb.position + nextVec);
