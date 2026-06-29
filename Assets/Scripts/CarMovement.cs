@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public class CarMovement : MonoBehaviour
 {
     public int speed = 5;
-    public float lateralSpeed = 2f;
+    public float lateralSpeed = 3f;
 
     public Vector2 inputVec;
     Rigidbody2D rb;
