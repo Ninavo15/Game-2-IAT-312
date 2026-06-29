@@ -3,10 +3,13 @@ using UnityEngine.InputSystem;
 
 public class CarMovement : MonoBehaviour
 {
-    public int speed = 5;
-    public float lateralSpeed = 3f;
+    public float speed = 5f;
+    public float lateralSpeed;
+    public float accel = 5f;
 
-    public Vector2 inputVec;
+
+    private Vector2 rawInput;
+    private Vector2 smoothedInput;
     Rigidbody2D rb;
 
     void Awake()
@@ -15,16 +18,21 @@ public class CarMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        Vector2 nextVec = new Vector2(
-            inputVec.x * lateralSpeed,   // side to side 
-            inputVec.y * speed            // forward / back
-        ) * Time.fixedDeltaTime;
+        //Debug.Log(smoothedInput);
+        if (smoothedInput.y > 0.1f) 
+        {
+            lateralSpeed = 3f;
+        } else {
+            lateralSpeed = 0f;
+        }
+            smoothedInput = Vector2.Lerp(smoothedInput, rawInput, accel * Time.fixedDeltaTime);
+        Vector2 nextVec = new Vector2(smoothedInput.x * lateralSpeed, smoothedInput.y * speed) * Time.fixedDeltaTime;
         rb.MovePosition(rb.position + nextVec);
     }
 
     void OnMove(InputValue value)
     {
-        inputVec = value.Get<Vector2>();
+        rawInput = value.Get<Vector2>();
     }
 
 }
