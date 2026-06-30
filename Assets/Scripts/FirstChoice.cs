@@ -3,19 +3,18 @@ using UnityEngine;
 public class FirstChoice : MonoBehaviour
 {
     public CarMovement car;
+    public ChoicePopup popup;
+    private bool triggered = false; // prevents re-triggering
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-
-    }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            Debug.Log("in");
+
             car.stopped = true;
+            triggered = true;
+            popup.ShowChoice();
         }
     }
 }
