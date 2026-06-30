@@ -12,6 +12,8 @@ public class CarMovement : MonoBehaviour
     private Vector2 smoothedInput;
     Rigidbody2D rb;
 
+
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>(); 
@@ -25,7 +27,7 @@ public class CarMovement : MonoBehaviour
         } else {
             lateralSpeed = 0f;
         }
-            smoothedInput = Vector2.Lerp(smoothedInput, rawInput, accel * Time.fixedDeltaTime);
+        smoothedInput = Vector2.Lerp(smoothedInput, rawInput, accel * Time.fixedDeltaTime);
         Vector2 nextVec = new Vector2(smoothedInput.x * lateralSpeed, smoothedInput.y * speed) * Time.fixedDeltaTime;
         rb.MovePosition(rb.position + nextVec);
     }

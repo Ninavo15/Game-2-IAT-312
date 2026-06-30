@@ -14,9 +14,6 @@ public class RoadManager : MonoBehaviour
         chunk1.SetOtherChunk(chunk2.transform);
         chunk2.SetOtherChunk(chunk1.transform);
 
-
-
-
     }
 
 }
