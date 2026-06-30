@@ -3,8 +3,7 @@ using UnityEngine;
 public class RoadManager : MonoBehaviour
 {
     public road chunk1;
-    public road chunk2;
-    public road chunk3;
+    public road2 chunk2;
 
 
 

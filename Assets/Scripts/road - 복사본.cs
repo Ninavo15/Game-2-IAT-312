@@ -1,13 +1,11 @@
 using UnityEngine;
 
-public class road : MonoBehaviour
+public class road2 : MonoBehaviour
 {
     private float chunkHeight;
     private Transform otherChunk;
     public float chunkCounter = 0;
-    [SerializeField]
-    GameObject exit;
-
+    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -27,16 +25,12 @@ public class road : MonoBehaviour
     void OnTriggerExit2D(Collider2D other)
     {
         Debug.Log(chunkCounter);
-        if (other.CompareTag("Player") && chunkCounter < 5)
+        if (other.CompareTag("Player") && chunkCounter < 4)
         {
             // player has left this chunk - move it above the other chunk
 
             chunkCounter++;
             transform.position = new Vector3(transform.position.x, otherChunk.position.y + chunkHeight, 0);
-        }
-        if (other.CompareTag("Player") && chunkCounter >= 5)
-        {
-            exit.transform.position = new Vector3(exit.transform.position.x, otherChunk.position.y + chunkHeight *2, 0);
         }
     }
 }

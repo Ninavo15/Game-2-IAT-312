@@ -12,10 +12,10 @@ public class FirstChoice : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player")) {
+        if (collision.CompareTag("Player"))
+        {
             Debug.Log("in");
-            car.speed = 1;
-            car.lateralSpeed = 1;
+            car.stopped = true;
         }
     }
 }

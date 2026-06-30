@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class road : MonoBehaviour
+public class road3 : MonoBehaviour
 {
     private float chunkHeight;
     private Transform otherChunk;
@@ -36,7 +36,7 @@ public class road : MonoBehaviour
         }
         if (other.CompareTag("Player") && chunkCounter >= 5)
         {
-            exit.transform.position = new Vector3(exit.transform.position.x, otherChunk.position.y + chunkHeight *2, 0);
+            exit.transform.position = new Vector3(exit.transform.position.x, otherChunk.position.y + chunkHeight, 0);
         }
     }
 }
