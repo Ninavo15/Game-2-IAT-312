@@ -1,6 +1,7 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class ChoicePopup : MonoBehaviour
 {
@@ -10,14 +11,24 @@ public class ChoicePopup : MonoBehaviour
 
     [Header("Stage 1 - Map")]
     public GameObject mapImage;
-    public GameObject mapPromptText; // "Why did the map stop working?"
+    public GameObject mapPromptText; 
     public float mapDisplayDuration = 3f;
 
     [Header("Stage 2 - Choice")]
-    public GameObject choiceUI; // the Q/E/Space prompt group
+    public GameObject choiceUI; 
     public GameObject arrowA;
     public GameObject arrowB;
 
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public AudioClip beepSound;
+
+    [Header("Scenes")]
+    public string pathAScene;
+    public string pathBScene;
+
+
+    public Fading fade;
     private bool choiceActive = false;
     private int selectedPath = 0;
 
@@ -26,7 +37,13 @@ public class ChoicePopup : MonoBehaviour
         choicePanel.SetActive(true);
         car.stopped = true;
 
-        // stage 1: show map, hide choice UI
+        if (audioSource != null && beepSound != null)
+        {
+            audioSource.PlayOneShot(beepSound);
+
+        }
+
+        // show map, hide choice UI
         mapImage.SetActive(true);
         mapPromptText.SetActive(true);
         choiceUI.SetActive(false);
@@ -40,7 +57,7 @@ public class ChoicePopup : MonoBehaviour
     {
         yield return new WaitForSeconds(mapDisplayDuration);
 
-        // stage 2: hide map, show choice UI
+        //  hide map, show choice UI
         mapImage.SetActive(false);
         mapPromptText.SetActive(false);
         choiceUI.SetActive(true);
@@ -48,6 +65,7 @@ public class ChoicePopup : MonoBehaviour
         choiceActive = true;
         selectedPath = 0;
         UpdateArrows();
+
     }
 
     void Update()
@@ -80,17 +98,19 @@ public class ChoicePopup : MonoBehaviour
 
     void ConfirmChoice()
     {
-        choicePanel.SetActive(false);
         choiceActive = false;
-        car.stopped = false;
 
         if (selectedPath == 1)
-        {
-            Debug.Log("Player chose Path A");
-        }
+            StartCoroutine(FadeAndLoad(pathAScene));
         else if (selectedPath == 2)
-        {
-            Debug.Log("Player chose Path B");
-        }
+            StartCoroutine(FadeAndLoad(pathBScene));
+    }
+
+    IEnumerator FadeAndLoad(string sceneName)
+    {
+        fade.FadeOut();
+        yield return new WaitForSeconds(fade.fadeDuration);
+        choicePanel.SetActive(false);           // disable AFTER fade finishes
+        SceneManager.LoadScene(sceneName);
     }
 }

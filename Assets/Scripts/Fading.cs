@@ -1,0 +1,41 @@
+using System.Collections;
+using UnityEngine;
+
+public class Fading : MonoBehaviour
+{
+    [SerializeField] CanvasGroup canGroup;
+    public float fadeDuration = 3.0f;
+    [SerializeField] private bool fadeIn = false;
+
+    private void Start()
+    {
+        if (fadeIn)
+        {
+            FadeIn();
+        } else { 
+            FadeOut();
+        }
+
+    }
+
+    public void FadeIn()
+    {
+        StartCoroutine(FadeCanvasGroup(canGroup, canGroup.alpha, 0, fadeDuration));
+    }
+    public void FadeOut()
+    {
+        StartCoroutine(FadeCanvasGroup(canGroup, canGroup.alpha, 1, fadeDuration));
+    }
+    private IEnumerator FadeCanvasGroup(CanvasGroup cg, float start, float end, float duration)
+    {
+        float elapsedTime = 0.0f;
+
+        while (elapsedTime < fadeDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            cg.alpha = Mathf.Lerp(start, end, elapsedTime / duration);
+            yield return null;
+        }
+        cg.alpha = end;
+    }
+}
