@@ -19,6 +19,11 @@ public class CharacterMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
+    void OnEnable()
+    {
+        rawInput = Vector2.zero;
+    }
+
     void FixedUpdate()
     {
         Vector2 nextPos = rb.position + rawInput * speed * Time.fixedDeltaTime;
