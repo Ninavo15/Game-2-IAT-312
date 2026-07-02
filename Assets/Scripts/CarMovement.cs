@@ -8,6 +8,13 @@ public class CarMovement : MonoBehaviour
     public float speed = 5f;
     public float lateralSpeed;
     public float accel = 5f;
+    public bool horizontalForward = false;
+
+    [Header("Stop & Exit")]
+    public float stopAtX = 5.6f;
+    public GameObject lowFuelUI;
+    public GameObject player;
+    public Vector2 exitOffset = new Vector2(-6.5858803f, -2.5f);
 
     [Header("Engine Sound")]
     public AudioSource engineSound;
@@ -29,6 +36,7 @@ public class CarMovement : MonoBehaviour
     private Vector2 rawInput;
     private Vector2 smoothedInput;
     Rigidbody2D rb;
+    RectTransform rectTransform;
 
     public Transform cameraTransform;
     public string sceneName;
@@ -36,6 +44,7 @@ public class CarMovement : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        rectTransform = GetComponent<RectTransform>();
 
         engineSound.clip = engineClip;
         beerSound.clip = beerClip;
@@ -49,6 +58,11 @@ public class CarMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if (!stopped && horizontalForward && rb.position.x >= stopAtX)
+        {
+            stopped = true;
+            if (lowFuelUI != null) lowFuelUI.SetActive(true);
+        }
 
         Vector2 targetInput = stopped ? Vector2.zero : rawInput;
 
@@ -60,8 +74,18 @@ public class CarMovement : MonoBehaviour
             lateralSpeed = 0f;
         }
         smoothedInput = Vector2.Lerp(smoothedInput, targetInput, accel * Time.fixedDeltaTime);
-        Vector2 nextVec = new Vector2(smoothedInput.x * lateralSpeed, smoothedInput.y * speed) * Time.fixedDeltaTime;
-        rb.MovePosition(rb.position + nextVec);
+        Vector2 nextVec = horizontalForward
+            ? new Vector2(smoothedInput.y * speed, smoothedInput.x * lateralSpeed) * Time.fixedDeltaTime
+            : new Vector2(smoothedInput.x * lateralSpeed, smoothedInput.y * speed) * Time.fixedDeltaTime;
+
+        if (rectTransform != null)
+        {
+            rectTransform.anchoredPosition += nextVec;
+        }
+        else
+        {
+            rb.MovePosition(rb.position + nextVec);
+        }
         UpdateEngineSound();
 
     }
@@ -93,6 +117,21 @@ public class CarMovement : MonoBehaviour
     void OnMove(InputValue value)
     {
         rawInput = value.Get<Vector2>();
+    }
+
+    void OnInteract(InputValue value)
+    {
+        if (!stopped || player == null) return;
+
+        engineSound.Stop();
+        beerSound.Stop();
+        GetComponent<PlayerInput>().enabled = false;
+        enabled = false;
+
+        player.transform.position = (Vector2)transform.position + exitOffset;
+        player.SetActive(true);
+
+        if (lowFuelUI != null) lowFuelUI.SetActive(false);
     }
 
 }
