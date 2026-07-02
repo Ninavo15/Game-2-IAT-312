@@ -1,5 +1,7 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class CarMovement : MonoBehaviour
 {
@@ -9,7 +11,9 @@ public class CarMovement : MonoBehaviour
 
     [Header("Engine Sound")]
     public AudioSource engineSound;
+    public AudioSource beerSound;
     public AudioClip engineClip;
+    public AudioClip beerClip;
 
 
 
@@ -20,22 +24,28 @@ public class CarMovement : MonoBehaviour
 
 
 
-
+    public Fading fade;
     public bool stopped = false;
     private Vector2 rawInput;
     private Vector2 smoothedInput;
     Rigidbody2D rb;
 
-
+    public Transform cameraTransform;
+    public string sceneName;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
 
         engineSound.clip = engineClip;
+        beerSound.clip = beerClip;
         engineSound.loop = true;
+        beerSound.loop = true;
+
         engineSound.volume = minVolume;
+        beerSound.volume = minVolume;
         engineSound.Play();
+        beerSound.Play();
     }
     private void FixedUpdate()
     {
@@ -61,10 +71,25 @@ public class CarMovement : MonoBehaviour
 
         engineSound.volume = Mathf.Lerp(minVolume, maxVolume, throttle);
         engineSound.pitch = Mathf.Lerp(minPitch, maxPitch, throttle);
+        beerSound.volume = Mathf.Lerp(minVolume, maxVolume, throttle);
+        
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Last Road"))
+        {
+            cameraTransform.SetParent(null);
+            StartCoroutine(FadeAndLoad(sceneName));
+        }
+    }
 
-
+    IEnumerator FadeAndLoad(string sceneName)
+    {
+        fade.FadeOut();
+        yield return new WaitForSeconds(fade.fadeDuration);
+        SceneManager.LoadScene(sceneName);
+    }
     void OnMove(InputValue value)
     {
         rawInput = value.Get<Vector2>();

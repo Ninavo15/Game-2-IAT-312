@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - BasicRoad
+  - Last Road
   layers:
   - Default
   - TransparentFX

@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.Timeline;
 
 public class GhostTile : MonoBehaviour
@@ -8,6 +10,10 @@ public class GhostTile : MonoBehaviour
     public AudioClip scareSound;
     public VignetteEffect vignetteEffect;
     [SerializeField] CarMovement car;
+    [SerializeField] GameObject ghost;
+
+    public float ghostDuration = 2.0f;
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -16,8 +22,17 @@ public class GhostTile : MonoBehaviour
             audioSource.PlayOneShot(scareSound);
             vignetteEffect.TriggerVignette();
             car.stopped = true;
+            StartCoroutine(GhostSequence());
+
 
         }
 
+    }
+
+    IEnumerator GhostSequence()
+    {
+        yield return new WaitForSeconds(ghostDuration);
+        ghost.SetActive(false);
+        car.stopped = false;
     }
 }
