@@ -647,6 +647,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a75f2efe5704c7459dd5e07e9ab3d62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarMovement
+  introActive: 0
+  introDuration: 2
   speed: 5
   lateralSpeed: 0
   accel: 5
@@ -1152,7 +1154,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Press E to exit the car
+  m_Text: Press & Hold E to exit the car
 --- !u!1 &822020820
 GameObject:
   m_ObjectHideFlags: 0
@@ -1312,7 +1314,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -164.4, y: 183.6}
+  m_AnchoredPosition: {x: -233.97, y: 239.3}
   m_SizeDelta: {x: 500, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &900000003
@@ -1391,7 +1393,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 90.9, y: 254.4}
+  m_AnchoredPosition: {x: 129.6, y: 379.7}
   m_SizeDelta: {x: 500, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &900000007
@@ -1435,7 +1437,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Watch the screen
+  m_Text: Press E to watch the screen
 --- !u!61 &900000009
 BoxCollider2D:
   m_ObjectHideFlags: 0
