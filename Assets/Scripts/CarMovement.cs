@@ -9,6 +9,7 @@ public class CarMovement : MonoBehaviour
     public float lateralSpeed;
     public float accel = 5f;
     public bool horizontalForward = false;
+    public bool lockLateralMovement = false;
 
     [Header("Stop & Exit")]
     public float stopAtX = 5.6f;
@@ -116,7 +117,9 @@ public class CarMovement : MonoBehaviour
     }
     void OnMove(InputValue value)
     {
-        rawInput = value.Get<Vector2>();
+        Vector2 v = value.Get<Vector2>();
+        if (lockLateralMovement) v.x = 0f;
+        rawInput = v;
     }
 
     void OnInteract(InputValue value)

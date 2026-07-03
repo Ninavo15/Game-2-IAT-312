@@ -24,7 +24,6 @@ public class Interactable : MonoBehaviour
     {
         if (collision.GetComponent<CharacterMovement>() == null) return;
         playerInRange = true;
-        if (promptText != null) promptText.SetActive(true);
     }
 
     void OnTriggerExit2D(Collider2D collision)
@@ -36,7 +35,13 @@ public class Interactable : MonoBehaviour
 
     void Update()
     {
-        if (playerInRange && Keyboard.current != null && Keyboard.current.eKey.wasPressedThisFrame)
+        bool showPrompt = playerInRange && !DialogueController.IsActive;
+        if (promptText != null && promptText.activeSelf != showPrompt)
+        {
+            promptText.SetActive(showPrompt);
+        }
+
+        if (showPrompt && Keyboard.current != null && Keyboard.current.eKey.wasPressedThisFrame)
         {
             onInteract.Invoke();
         }

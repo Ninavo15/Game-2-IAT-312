@@ -19,6 +19,7 @@ public class ScreenController : MonoBehaviour
     public float missingDisplayDuration = 1.5f;
     public CharacterMovement character;
     public Interactable screenInteractable;
+    public Interactable carInteractable;
     public Text carPromptText;
 
     [Header("POV Image Scale")]
@@ -29,6 +30,7 @@ public class ScreenController : MonoBehaviour
 
     [Header("Dialogue")]
     public DialogueController dialogue;
+    public FinalChoiceController finalChoice;
 
     State state = State.Off;
     bool sequenceComplete = false;
@@ -41,12 +43,28 @@ public class ScreenController : MonoBehaviour
             state = State.MissingScreen;
             screenRenderer.sprite = missingScreenSprite;
             if (dialogue != null) dialogue.ShowLine("Why is there a blood stain here?");
+
+            // The blood stain has been checked — no re-checking until the
+            // screen sequence finishes and re-enables this for "check the car".
+            if (carInteractable != null) carInteractable.enabled = false;
         }
         else if (sequenceComplete && !corpseDialogueShown)
         {
             corpseDialogueShown = true;
-            if (dialogue != null) dialogue.ShowLine("The corpse of the girl is in my car trunk.", 5f);
+
+            // The car has been fully checked — lock out further interaction.
+            if (carInteractable != null) carInteractable.enabled = false;
+
+            StartCoroutine(ShowCorpseDialogueThenChoice());
         }
+    }
+
+    IEnumerator ShowCorpseDialogueThenChoice()
+    {
+        const float corpseDuration = 5f;
+        if (dialogue != null) dialogue.ShowLine("The corpse of the girl is in my car trunk.", corpseDuration);
+        yield return new WaitForSeconds(corpseDuration);
+        if (finalChoice != null) finalChoice.TriggerFinalChoice();
     }
 
     public void ShowFootage()
@@ -79,7 +97,7 @@ public class ScreenController : MonoBehaviour
 
         povImage.sprite = footageSprite;
         povImage.rectTransform.localScale = Vector3.one * footageImageScale;
-        StartCoroutine(ShowLineDelayed("Wait! That's my car!", 2f));
+        StartCoroutine(ShowLineDelayed("Wait! That's my car!!!", 2f));
 
         // Stay open for whatever's left of the audio so both finish together.
         float remaining = audioLength - missingDisplayDuration;
@@ -88,11 +106,14 @@ public class ScreenController : MonoBehaviour
         povPanel.SetActive(false);
         if (character != null) character.enabled = true;
 
-        // The screen has been fully watched — lock out further interaction.
+        // After The screen has been fully watched,lock out further interaction.
         if (screenInteractable != null) screenInteractable.enabled = false;
 
-        // The blood stain has already been found — update the car's prompt.
+        //update the car's prompt.
         if (carPromptText != null) carPromptText.text = "Press E to check the car";
+
+        // Re-enable the car now that there's something new to check.
+        if (carInteractable != null) carInteractable.enabled = true;
 
         sequenceComplete = true;
         if (dialogue != null) dialogue.ShowLine("I need to check my car.");
