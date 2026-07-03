@@ -27,13 +27,26 @@ public class ScreenController : MonoBehaviour
     [Tooltip("Relative on-screen scale of the footage clip inside the POV frame. Lower this if footage looks bigger than the missing poster.")]
     public float footageImageScale = 0.9f;
 
-    State state = State.Off;
+    [Header("Dialogue")]
+    public DialogueController dialogue;
 
-    public void TurnOnAndShowMissing()
+    State state = State.Off;
+    bool sequenceComplete = false;
+    bool corpseDialogueShown = false;
+
+    public void OnCarInteract()
     {
-        if (state != State.Off) return;
-        state = State.MissingScreen;
-        screenRenderer.sprite = missingScreenSprite;
+        if (state == State.Off)
+        {
+            state = State.MissingScreen;
+            screenRenderer.sprite = missingScreenSprite;
+            if (dialogue != null) dialogue.ShowLine("Why is there a blood stain here?");
+        }
+        else if (sequenceComplete && !corpseDialogueShown)
+        {
+            corpseDialogueShown = true;
+            if (dialogue != null) dialogue.ShowLine("The corpse of the girl is in my car trunk.", 5f);
+        }
     }
 
     public void ShowFootage()
@@ -51,6 +64,7 @@ public class ScreenController : MonoBehaviour
         povPanel.SetActive(true);
         povImage.sprite = missingScreenSprite;
         povImage.rectTransform.localScale = Vector3.one * missingImageScale;
+        StartCoroutine(ShowLineDelayed("This girl looks familiar...", 2f));
 
         // Audio starts as soon as the missing poster is shown.
         float audioLength = 0f;
@@ -65,6 +79,7 @@ public class ScreenController : MonoBehaviour
 
         povImage.sprite = footageSprite;
         povImage.rectTransform.localScale = Vector3.one * footageImageScale;
+        StartCoroutine(ShowLineDelayed("Wait! That's my car!", 2f));
 
         // Stay open for whatever's left of the audio so both finish together.
         float remaining = audioLength - missingDisplayDuration;
@@ -78,5 +93,14 @@ public class ScreenController : MonoBehaviour
 
         // The blood stain has already been found — update the car's prompt.
         if (carPromptText != null) carPromptText.text = "Press E to check the car";
+
+        sequenceComplete = true;
+        if (dialogue != null) dialogue.ShowLine("I need to check my car.");
+    }
+
+    IEnumerator ShowLineDelayed(string line, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        if (dialogue != null) dialogue.ShowLine(line);
     }
 }
