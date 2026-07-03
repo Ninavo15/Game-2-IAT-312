@@ -10707,7 +10707,7 @@ MonoBehaviour:
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: 
+  m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &1851942887
@@ -10726,6 +10726,7 @@ MonoBehaviour:
   lateralSpeed: 2
   accel: 2
   horizontalForward: 0
+  lockLateralMovement: 0
   stopAtX: 5.6
   lowFuelUI: {fileID: 0}
   player: {fileID: 0}

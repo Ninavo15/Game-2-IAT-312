@@ -117,13 +117,16 @@ public class CarMovement : MonoBehaviour
     }
     void OnMove(InputValue value)
     {
-        Vector2 v = value.Get<Vector2>();
-        if (lockLateralMovement) v.x = 0f;
-        rawInput = v;
+        rawInput = value.Get<Vector2>();
+        
+        if (lockLateralMovement) rawInput.x = 0f;
+        
     }
 
     void OnInteract(InputValue value)
     {
+        Debug.Log("OnInteract fired!");
+        
         if (!stopped || player == null) return;
 
         engineSound.Stop();
