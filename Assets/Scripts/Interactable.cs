@@ -14,6 +14,12 @@ public class Interactable : MonoBehaviour
         if (promptText != null) promptText.SetActive(false);
     }
 
+    void OnDisable()
+    {
+        playerInRange = false;
+        if (promptText != null) promptText.SetActive(false);
+    }
+
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.GetComponent<CharacterMovement>() == null) return;
