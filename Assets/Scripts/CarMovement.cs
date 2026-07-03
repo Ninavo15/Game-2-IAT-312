@@ -28,6 +28,9 @@ public class CarMovement : MonoBehaviour
     public AudioSource beerSound;
     public AudioClip engineClip;
     public AudioClip beerClip;
+    public AudioClip crashClip;
+    public AudioSource carCrash;
+
 
 
 
@@ -47,6 +50,7 @@ public class CarMovement : MonoBehaviour
 
     public Transform cameraTransform;
     public string sceneName;
+    private bool crashed = false;
 
     void Awake()
     {
@@ -138,12 +142,23 @@ public class CarMovement : MonoBehaviour
             cameraTransform.SetParent(null);
             StartCoroutine(FadeAndLoad(sceneName));
         }
-        if(collision.CompareTag("Cam Road"))
+        if (collision.CompareTag("Cam Road"))
         {
+            Debug.Log("Cam Road triggered");
             cameraTransform.SetParent(transform, true);
+            Debug.Log("Camera parent is now: " + cameraTransform.parent.name);
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("log") && !crashed)
+        {
+            stopped = true;
+            crashed = true;
+            carCrash.Play();
+        }
+    }
     IEnumerator FadeAndLoad(string sceneName)
     {
         fade.FadeOut();
