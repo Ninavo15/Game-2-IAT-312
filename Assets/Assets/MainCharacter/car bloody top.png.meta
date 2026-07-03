@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: e5fdd7b3a4b5f49ae8d2fa23d232b4e8
+guid: e4f102801f048a14a8a02d2c4ee89de4
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7683075655767759259
-    second: Car Radio_0
+      213: -785661298704093460
+    second: car bloody top_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -97,19 +97,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
     buildTarget: iOS
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -126,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Car Radio_0
+      name: car bloody top_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 320
-        height: 192
+        x: 67
+        y: 47
+        width: 122
+        height: 170
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 566e283d56b306590800000000000000
-      internalID: -7683075655767759259
+      spriteID: cee68f02635c815f0800000000000000
+      internalID: -785661298704093460
       vertices: []
       indices: 
       edges: []
@@ -161,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Car Radio_0: -7683075655767759259
+      car bloody top_0: -785661298704093460
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

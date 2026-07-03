@@ -148,6 +148,11 @@ public class CarMovement : MonoBehaviour
             cameraTransform.SetParent(transform, true);
             Debug.Log("Camera parent is now: " + cameraTransform.parent.name);
         }
+        if(collision.CompareTag("Ending Road"))
+        {
+            cameraTransform.SetParent(null);
+            StartCoroutine(FadeAndLoad("Ending 2 (DIE)"));
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -157,6 +162,7 @@ public class CarMovement : MonoBehaviour
             stopped = true;
             crashed = true;
             carCrash.Play();
+            StartCoroutine(FadeAndLoad("Ending 1 (CAPTURE)"));
         }
     }
     IEnumerator FadeAndLoad(string sceneName)

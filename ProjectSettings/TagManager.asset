@@ -8,6 +8,7 @@ TagManager:
   - Last Road
   - Cam Road
   - log
+  - Ending Road
   layers:
   - Default
   - TransparentFX
