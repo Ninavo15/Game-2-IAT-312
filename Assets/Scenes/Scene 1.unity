@@ -5841,6 +5841,11 @@ MonoBehaviour:
   speed: 4
   lateralSpeed: 2
   accel: 2
+  horizontalForward: 0
+  stopAtX: 5.6
+  lowFuelUI: {fileID: 0}
+  player: {fileID: 0}
+  exitOffset: {x: -6.5858803, y: -2.5}
   engineSound: {fileID: 589246552}
   beerSound: {fileID: 589246553}
   engineClip: {fileID: 8300000, guid: cf392d36fc5eefe41bfd5bd8a835125c, type: 3}
@@ -6009,7 +6014,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.551
   m_Pitch: 1
   Loop: 0
   Mute: 0
