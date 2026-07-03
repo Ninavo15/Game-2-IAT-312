@@ -10722,6 +10722,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a75f2efe5704c7459dd5e07e9ab3d62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  introActive: 0
+  introDuration: 1
   speed: 4
   lateralSpeed: 2
   accel: 2
@@ -10735,6 +10737,8 @@ MonoBehaviour:
   beerSound: {fileID: 1851942890}
   engineClip: {fileID: 8300000, guid: cf392d36fc5eefe41bfd5bd8a835125c, type: 3}
   beerClip: {fileID: 8300000, guid: d24ccacf3028ad14d912d1b8b9ce2fb8, type: 3}
+  crashClip: {fileID: 0}
+  carCrash: {fileID: 0}
   minVolume: 0.1
   maxVolume: 1
   minPitch: 0.8

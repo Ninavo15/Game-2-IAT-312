@@ -8,7 +8,7 @@ public class CarMovement : MonoBehaviour
 
     [Header("Intro Sequence")]
     public bool introActive;
-    public float introDuration = 2f; // how long car drives itself in
+    public float introDuration = 1f; // how long car drives itself in
 
 
     public float speed = 5f;
@@ -80,10 +80,10 @@ public class CarMovement : MonoBehaviour
         float elapsed = 0f;
         while (elapsed < introDuration)
         {
-            elapsed += Time.deltaTime;
+            elapsed += Time.fixedDeltaTime;
             rb.MovePosition(rb.position + Vector2.up * speed * Time.fixedDeltaTime);
             yield return new WaitForFixedUpdate(); 
-            yield return null;
+            
         }
 
         stopped = false;

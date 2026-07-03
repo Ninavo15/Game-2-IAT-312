@@ -12006,7 +12006,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   introActive: 1
-  introDuration: 0.7
+  introDuration: 2
   speed: 4
   lateralSpeed: 2
   accel: 2
