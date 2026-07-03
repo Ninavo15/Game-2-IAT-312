@@ -110,7 +110,7 @@ public class ChoicePopup : MonoBehaviour
     {
         fade.FadeOut();
         yield return new WaitForSeconds(fade.fadeDuration);
-        choicePanel.SetActive(false);           // disable AFTER fade finishes
+        choicePanel.SetActive(false);           
         SceneManager.LoadScene(sceneName);
     }
 }

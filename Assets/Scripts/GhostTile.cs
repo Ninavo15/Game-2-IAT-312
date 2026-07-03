@@ -11,6 +11,7 @@ public class GhostTile : MonoBehaviour
     public VignetteEffect vignetteEffect;
     [SerializeField] CarMovement car;
     [SerializeField] GameObject ghost;
+    [SerializeField] promptPop pp;
 
     public float ghostDuration = 2.0f;
 
@@ -24,7 +25,9 @@ public class GhostTile : MonoBehaviour
             car.stopped = true;
             StartCoroutine(GhostSequence());
 
-
+            pp.ShowPrompt();
+            StressSystem.AddPoint(1);
+            Debug.Log("stress point: " + StressSystem.stressPoints);
         }
 
     }
