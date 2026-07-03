@@ -5,6 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class CarMovement : MonoBehaviour
 {
+
+    [Header("Intro Sequence")]
+    public bool introActive;
+    public float introDuration = 2f; // how long car drives itself in
+
+
     public float speed = 5f;
     public float lateralSpeed;
     public float accel = 5f;
@@ -57,8 +63,33 @@ public class CarMovement : MonoBehaviour
         engineSound.Play();
         beerSound.Play();
     }
+    private void Start()
+    {
+        if (introActive)
+        {
+            stopped = true; // block player input
+            StartCoroutine(IntroSequence());
+        }
+    }
+    IEnumerator IntroSequence()
+    {
+        float elapsed = 0f;
+        while (elapsed < introDuration)
+        {
+            elapsed += Time.deltaTime;
+            rb.MovePosition(rb.position + Vector2.up * speed * Time.fixedDeltaTime);
+            yield return new WaitForFixedUpdate(); 
+            yield return null;
+        }
+
+        stopped = false;
+        introActive = false;
+
+    }
+
     private void FixedUpdate()
     {
+        if (introActive) return;
         if (!stopped && horizontalForward && rb.position.x >= stopAtX)
         {
             stopped = true;
@@ -106,6 +137,10 @@ public class CarMovement : MonoBehaviour
         {
             cameraTransform.SetParent(null);
             StartCoroutine(FadeAndLoad(sceneName));
+        }
+        if(collision.CompareTag("Cam Road"))
+        {
+            cameraTransform.SetParent(transform, true);
         }
     }
 

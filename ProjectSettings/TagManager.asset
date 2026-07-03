@@ -6,6 +6,7 @@ TagManager:
   tags:
   - BasicRoad
   - Last Road
+  - Cam Road
   layers:
   - Default
   - TransparentFX
