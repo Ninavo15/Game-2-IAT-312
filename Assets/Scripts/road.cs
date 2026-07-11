@@ -7,6 +7,9 @@ public class road : MonoBehaviour
     public float chunkCounter = 0;
     [SerializeField]
     GameObject exit;
+    [SerializeField]
+    GameObject dear;
+
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -37,6 +40,10 @@ public class road : MonoBehaviour
         if (other.CompareTag("Player") && chunkCounter >= 5)
         {
             exit.transform.position = new Vector3(exit.transform.position.x, otherChunk.position.y + chunkHeight *2, 0);
+        }
+        if (other.CompareTag("Player") && chunkCounter >= 3)
+        {
+            dear.transform.position = new Vector3(exit.transform.position.x, otherChunk.position.y + chunkHeight * 2, 0);
         }
     }
 }
