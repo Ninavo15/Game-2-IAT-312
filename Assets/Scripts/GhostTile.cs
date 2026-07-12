@@ -45,5 +45,6 @@ public class GhostTile : MonoBehaviour
         pov.SetActive(true);
         heart.SetActive(true);
         keys.SetActive(true);
+        
     }
 }
