@@ -12,6 +12,11 @@ public class GhostTile : MonoBehaviour
     [SerializeField] CarMovement car;
     [SerializeField] GameObject ghost;
     [SerializeField] promptPop pp;
+    [SerializeField] GameObject carr;
+    [SerializeField] GameObject pov;
+    [SerializeField] GameObject heart;
+    [SerializeField] GameObject keys;
+
 
     public float ghostDuration = 2.0f;
 
@@ -36,6 +41,9 @@ public class GhostTile : MonoBehaviour
     {
         yield return new WaitForSeconds(ghostDuration);
         ghost.SetActive(false);
-        car.stopped = false;
+        carr.SetActive(false);
+        pov.SetActive(true);
+        heart.SetActive(true);
+        keys.SetActive(true);
     }
 }
