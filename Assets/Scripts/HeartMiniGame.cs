@@ -5,19 +5,27 @@ using UnityEngine;
 public class HeartMiniGame : MonoBehaviour
 {
     bool keyIn;
+    public float life = 3;
     public List<GameObject> ekeys = new List<GameObject>();
 
     private void Update()
     {
         if (keyIn)
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E) && life > 0 && ekeys.Count > 0)
             {
-                Debug.Log("E");
+                Destroy(ekeys[0]);
                 ekeys.RemoveAt(0);
             }
         }
-        Debug.Log(keyIn);
+        if (!keyIn)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                life--;
+                Debug.Log("Your life remaining: " + life);
+            }
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
