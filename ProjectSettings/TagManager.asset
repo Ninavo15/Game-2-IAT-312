@@ -11,6 +11,7 @@ TagManager:
   - Ending Road
   - dear
   - ekeys
+  - Ghost
   layers:
   - Default
   - TransparentFX
@@ -21,8 +22,8 @@ TagManager:
   - No Post
   - pp
   - ekeys
-  - 
-  - 
+  - ghost
+  - carpov
   - 
   - 
   - 

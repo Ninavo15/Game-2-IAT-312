@@ -1,11 +1,18 @@
 using NUnit.Framework;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class HeartMiniGame : MonoBehaviour
 {
+    [SerializeField]
+    GameObject ghost;
+    [SerializeField]
+    jumpscare jump;
+
     bool keyIn;
     public float life = 3;
+    public float JumpSpeed = 3;
     public List<GameObject> ekeys = new List<GameObject>();
 
     private void Update()
@@ -26,6 +33,11 @@ public class HeartMiniGame : MonoBehaviour
                 Debug.Log("Your life remaining: " + life);
             }
         }
+        if (life <= 0 && !jump.jumped)
+        {
+            StartCoroutine(JumpSequence());
+            ghost.transform.Translate(Vector2.up * JumpSpeed * Time.deltaTime);
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -42,4 +54,10 @@ public class HeartMiniGame : MonoBehaviour
             ekeys.Remove(collision.gameObject);
         }
     }
+
+    IEnumerator JumpSequence()
+    {
+
+    }
+
 }
