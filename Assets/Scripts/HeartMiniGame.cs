@@ -9,11 +9,24 @@ public class HeartMiniGame : MonoBehaviour
     GameObject ghost;
     [SerializeField]
     jumpscare jump;
+    [SerializeField]
+    GameObject ekeyy;
+    [SerializeField]
+    GameObject gPic;
+    SpriteRenderer sr;
 
     bool keyIn;
     public float life = 3;
     public float JumpSpeed = 3;
     public List<GameObject> ekeys = new List<GameObject>();
+    private bool jumping = false;
+
+
+    private void Start()
+    {
+        sr = GetComponent<SpriteRenderer>();
+    }
+
 
     private void Update()
     {
@@ -35,8 +48,14 @@ public class HeartMiniGame : MonoBehaviour
         }
         if (life <= 0 && !jump.jumped)
         {
+            sr.enabled = false;
+            gPic.SetActive(false);
+            Destroy(ekeyy);
             StartCoroutine(JumpSequence());
-            ghost.transform.Translate(Vector2.up * JumpSpeed * Time.deltaTime);
+            if (jumping)
+            {
+                ghost.transform.Translate(Vector2.up * JumpSpeed * Time.deltaTime);
+            }
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -57,7 +76,8 @@ public class HeartMiniGame : MonoBehaviour
 
     IEnumerator JumpSequence()
     {
-
+        yield return new WaitForSeconds(4);
+        jumping = true;
     }
 
 }
