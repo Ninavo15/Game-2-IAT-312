@@ -81,7 +81,27 @@ public class HeartMiniGame : MonoBehaviour
         StartCoroutine(Beat());
     }
 
+    private void FixedUpdate()
+    {
+        if (life <= 0 && !jump.jumped)
+        {
+            blink.SetActive(true);
+            sr.enabled = false;
+            Destroy(ekeyy);
 
+            if (!jumpStarted)
+            {
+                jumpStarted = true;
+                StartCoroutine(JumpSequence());
+            }
+
+            if (jumping)
+            {
+                ghostRb.MovePosition(ghostRb.position + Vector2.left * JumpSpeed * Time.fixedDeltaTime);
+            }
+            StressSystem.AddPoint();
+        }
+    }
     private void Update()
     {
 
@@ -122,24 +142,7 @@ public class HeartMiniGame : MonoBehaviour
                 life--;
             }
         }
-        if (life <= 0 && !jump.jumped)
-        {
-            blink.SetActive(true); 
-            sr.enabled = false; 
-            Destroy(ekeyy);
 
-            if (!jumpStarted)
-            {
-                jumpStarted = true;
-                StartCoroutine(JumpSequence());
-            }
-
-            if (jumping)
-            {
-                ghostRb.MovePosition(ghostRb.position + Vector2.left * JumpSpeed * Time.deltaTime);
-            }
-            StressSystem.AddPoint();
-        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

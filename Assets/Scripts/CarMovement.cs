@@ -1,6 +1,8 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
 public class CarMovement : MonoBehaviour
@@ -31,7 +33,7 @@ public class CarMovement : MonoBehaviour
     public AudioClip crashClip;
     public AudioSource carCrash;
 
-
+    public Light2D spotLight;
 
 
     public float minVolume = 0.1f;
@@ -81,12 +83,31 @@ public class CarMovement : MonoBehaviour
         while (elapsed < introDuration)
         {
             elapsed += Time.fixedDeltaTime;
-            rb.MovePosition(rb.position + Vector2.up * speed * Time.fixedDeltaTime);
+
+            if (horizontalForward)
+            {
+                rb.MovePosition(rb.position + Vector2.right * speed * Time.fixedDeltaTime);
+                if (elapsed >= introDuration)
+                {
+                    engineSound.Pause();
+                    beerSound.Pause();
+                    stopped = true;
+                    spotLight.enabled = false;
+                }
+            }
+            else
+            {
+                {
+                    rb.MovePosition(rb.position + Vector2.up * speed * Time.fixedDeltaTime);
+                }
+            }
             yield return new WaitForFixedUpdate(); 
             
         }
-
-        stopped = false;
+        if (!horizontalForward)
+        {
+            stopped = false;
+        }
         introActive = false;
 
     }

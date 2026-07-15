@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 06c36aac3df54e74c8766475261d49cb
+guid: e3d2ceebf1ec78f4c910754fdddaf89f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1767767317611825199
-    second: car pov test_0
+      213: 8213132913081502940
+    second: Side View v2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -72,7 +72,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 4096
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: car pov test_0
+      name: Side View v2_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 2048
-        height: 1280
+        width: 256
+        height: 144
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1d7b33c9df0a777e0800000000000000
-      internalID: -1767767317611825199
+      spriteID: cdcca419ed8eaf170800000000000000
+      internalID: 8213132913081502940
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      car pov test_0: -1767767317611825199
+      Side View v2_0: 8213132913081502940
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -9014,7 +9014,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.001126051, y: -0.099321365}
+  m_Offset: {x: 0.001126051, y: 0.1488775}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -9024,7 +9024,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 2.714262, y: 3.4013562}
+  m_Size: {x: 2.714262, y: 3.897754}
   m_EdgeRadius: 0
 --- !u!82 &834094369
 AudioSource:
@@ -9367,7 +9367,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -734526755
   m_SortingLayer: 1
-  m_SortingOrder: 4
+  m_SortingOrder: 5
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 268d8f94294055a40b2248732c388bb7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -14062,6 +14062,7 @@ MonoBehaviour:
   beerClip: {fileID: 8300000, guid: d24ccacf3028ad14d912d1b8b9ce2fb8, type: 3}
   crashClip: {fileID: 0}
   carCrash: {fileID: 0}
+  spotLight: {fileID: 0}
   minVolume: 0.1
   maxVolume: 1
   minPitch: 0.8
