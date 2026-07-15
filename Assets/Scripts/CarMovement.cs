@@ -94,7 +94,6 @@ public class CarMovement : MonoBehaviour
         while (elapsed < introDuration)
         {
             elapsed += Time.fixedDeltaTime;
-<<<<<<< Updated upstream
 
             if (horizontalForward)
             {
@@ -109,17 +108,9 @@ public class CarMovement : MonoBehaviour
             }
             else
             {
-                {
-                    rb.MovePosition(rb.position + Vector2.up * speed * Time.fixedDeltaTime);
-                }
+                rb.MovePosition(rb.position + Vector2.up * speed * Time.fixedDeltaTime);
             }
-            yield return new WaitForFixedUpdate(); 
-            
-=======
-            rb.MovePosition(rb.position + Vector2.up * speed * Time.fixedDeltaTime);
             yield return new WaitForFixedUpdate();
-
->>>>>>> Stashed changes
         }
         if (!horizontalForward)
         {
