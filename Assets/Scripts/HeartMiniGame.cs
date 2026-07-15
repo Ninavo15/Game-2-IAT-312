@@ -2,29 +2,65 @@ using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class HeartMiniGame : MonoBehaviour
 {
+    [Header("GameObject")]
     [SerializeField]
     GameObject ghost;
-    [SerializeField]
-    jumpscare jump;
     [SerializeField]
     GameObject ekeyy;
     [SerializeField]
     GameObject gPic;
-    SpriteRenderer sr;
+    [SerializeField]
+    GameObject blink;
+    [SerializeField]
+    GameObject carPov;
+    [SerializeField]
+    GameObject car;
 
+
+
+    [Header("Audio")]
+
+    [SerializeField] 
+    AudioSource audioSource;
+    [SerializeField]
+    AudioSource jumpscare;
+    [SerializeField] 
+    AudioClip gasp;
+    [SerializeField] 
+    AudioClip stab;
+
+    [Header("Etc.")]
+    [SerializeField]
+    jumpscare jump;
+    [SerializeField]
+    Rigidbody2D ghostRb;
+    [SerializeField] 
+    promptPop pp;
+    [SerializeField] CarMovement carMove;
+
+
+    SpriteRenderer sr;
+    public VignetteEffect vignetteEffect;
+
+    private bool jumpStarted = false;
+    
     bool keyIn;
-    public float life = 3;
+
+    [Header("Parameters")]
+    public float life = 2;
     public float JumpSpeed = 3;
     public List<GameObject> ekeys = new List<GameObject>();
-    private bool jumping = false;
 
+    private bool jumping = false;
 
     private void Start()
     {
         sr = GetComponent<SpriteRenderer>();
+        ghostRb = ghost.GetComponent<Rigidbody2D>();
     }
 
 
@@ -42,20 +78,30 @@ public class HeartMiniGame : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
+                vignetteEffect.TriggerVignette();
+                audioSource.PlayOneShot(gasp);
+                audioSource.PlayOneShot(stab);
                 life--;
                 Debug.Log("Your life remaining: " + life);
             }
         }
         if (life <= 0 && !jump.jumped)
         {
-            sr.enabled = false;
-            gPic.SetActive(false);
+            blink.SetActive(true); 
+            sr.enabled = false; 
             Destroy(ekeyy);
-            StartCoroutine(JumpSequence());
+
+            if (!jumpStarted)
+            {
+                jumpStarted = true;
+                StartCoroutine(JumpSequence());
+            }
+
             if (jumping)
             {
-                ghost.transform.Translate(Vector2.up * JumpSpeed * Time.deltaTime);
+                ghostRb.MovePosition(ghostRb.position + Vector2.left * JumpSpeed * Time.deltaTime);
             }
+            StressSystem.AddPoint();
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -76,8 +122,17 @@ public class HeartMiniGame : MonoBehaviour
 
     IEnumerator JumpSequence()
     {
+        yield return new WaitForSeconds(1);
+        gPic.SetActive(false);
         yield return new WaitForSeconds(4);
+        jumpscare.Play();
         jumping = true;
+        yield return new WaitForSeconds(2.5f);
+        ghost.SetActive(false);
+        carPov.SetActive(false);
+        car.SetActive(true);
+        pp.ShowPrompt2();
+        carMove.stopped = false;    
     }
 
 }
