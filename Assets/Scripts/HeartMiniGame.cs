@@ -6,6 +6,11 @@ using UnityEngine.Audio;
 
 public class HeartMiniGame : MonoBehaviour
 {
+
+
+
+
+
     [Header("GameObject")]
     [SerializeField]
     GameObject ghost;
@@ -19,6 +24,8 @@ public class HeartMiniGame : MonoBehaviour
     GameObject carPov;
     [SerializeField]
     GameObject car;
+    [SerializeField]
+    GameObject lastE;
 
 
 
@@ -45,13 +52,21 @@ public class HeartMiniGame : MonoBehaviour
 
     SpriteRenderer sr;
     public VignetteEffect vignetteEffect;
-
+    private GameObject collectedKey;
     private bool jumpStarted = false;
     
     bool keyIn;
 
+    [Header("Heart Animation")]
+    public float beatSize = 1.15f;
+    public float beatSpeed = 1f;
+    Vector3 originalScale;
+
     [Header("Parameters")]
     public float life = 2;
+    float ogLife;
+
+
     public float JumpSpeed = 3;
     public List<GameObject> ekeys = new List<GameObject>();
 
@@ -59,30 +74,52 @@ public class HeartMiniGame : MonoBehaviour
 
     private void Start()
     {
+        ogLife = life;
         sr = GetComponent<SpriteRenderer>();
         ghostRb = ghost.GetComponent<Rigidbody2D>();
+        originalScale = transform.localScale;
+        StartCoroutine(Beat());
     }
 
 
     private void Update()
     {
+
+        if (life != ogLife)
+        {
+            vignetteEffect.TriggerVignette();
+            audioSource.PlayOneShot(gasp);
+            audioSource.PlayOneShot(stab);
+            ogLife--;
+            Debug.Log("Your life remaining: " + life);
+        }
+
+
         if (keyIn)
         {
             if (Input.GetKeyDown(KeyCode.E) && life > 0 && ekeys.Count > 0)
             {
-                Destroy(ekeys[0]);
+                collectedKey = ekeys[0];
+                
+                GameObject key = ekeys[0];
+                if (key == lastE)
+                {
+                    blink.SetActive(true);
+                    StartCoroutine(SafeSequence());
+                    sr.enabled = false;
+                    Destroy(ekeyy);
+                }
+                Destroy(key);
                 ekeys.RemoveAt(0);
             }
         }
+
+
         if (!keyIn)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                vignetteEffect.TriggerVignette();
-                audioSource.PlayOneShot(gasp);
-                audioSource.PlayOneShot(stab);
                 life--;
-                Debug.Log("Your life remaining: " + life);
             }
         }
         if (life <= 0 && !jump.jumped)
@@ -116,6 +153,12 @@ public class HeartMiniGame : MonoBehaviour
         if (collision.CompareTag("ekeys"))
         {
             keyIn = false;
+
+            if (collision.gameObject != collectedKey)
+            {
+                life--;
+            }
+
             ekeys.Remove(collision.gameObject);
         }
     }
@@ -134,5 +177,36 @@ public class HeartMiniGame : MonoBehaviour
         pp.ShowPrompt2();
         carMove.stopped = false;    
     }
+    IEnumerator SafeSequence()
+    {
+        yield return new WaitForSeconds(1);
+        gPic.SetActive(false);
+        yield return new WaitForSeconds(2);
+        ghost.SetActive(false);
+        carPov.SetActive(false);
+        car.SetActive(true);
+        pp.ShowPrompt2();
+        carMove.stopped = false;  
+    }
+    IEnumerator Beat()
+    {
+        while (true)
+        {
+            // First beat
+            transform.localScale = originalScale * beatSize;
+            yield return new WaitForSeconds(beatSpeed);
 
+            transform.localScale = originalScale;
+            yield return new WaitForSeconds(0.3f);
+
+            // Second beat
+            transform.localScale = originalScale * (beatSize * 0.95f);
+            yield return new WaitForSeconds(beatSpeed);
+
+            transform.localScale = originalScale;
+
+            // Pause 
+            yield return new WaitForSeconds(0.6f);
+        }
+    }
 }
