@@ -43,6 +43,8 @@ public class Interactable : MonoBehaviour
 
         if (showPrompt && Keyboard.current != null && Keyboard.current.eKey.wasPressedThisFrame)
         {
+            if (promptText != null) promptText.SetActive(false);
+            enabled = false; // one-shot: don't let the prompt flicker back on afterward
             onInteract.Invoke();
         }
     }

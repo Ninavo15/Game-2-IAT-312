@@ -4,12 +4,16 @@ using UnityEngine.InputSystem;
 public class CharacterMovement : MonoBehaviour
 {
     public float speed = 3f;
-    public float maxY = 1.5f;
 
     public SpriteRenderer spriteRenderer;
     public Sprite sideSprite;
     public Sprite frontSprite;
     public Sprite backSprite;
+
+    // True while facing right (the sideSprite's default, unflipped orientation).
+    // Persists across sprite swaps so other scripts can read the last real
+    // facing direction even while showing a different sprite (e.g. hand up).
+    public bool FacingRight { get; private set; } = true;
 
     Rigidbody2D rb;
     Vector2 rawInput;
@@ -26,31 +30,18 @@ public class CharacterMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector2 nextPos = rb.position + rawInput * speed * Time.fixedDeltaTime;
-        nextPos.y = Mathf.Min(nextPos.y, maxY);
+        Vector2 nextPos = rb.position + new Vector2(rawInput.x, 0f) * speed * Time.fixedDeltaTime;
         rb.MovePosition(nextPos);
         UpdateSprite();
     }
 
     void UpdateSprite()
     {
-        if (rawInput == Vector2.zero) return;
+        if (rawInput.x == 0f) return;
 
-        if (Mathf.Abs(rawInput.x) >= Mathf.Abs(rawInput.y))
-        {
-            spriteRenderer.sprite = sideSprite;
-            spriteRenderer.flipX = rawInput.x < 0f;
-        }
-        else if (rawInput.y > 0f)
-        {
-            spriteRenderer.sprite = backSprite;
-            spriteRenderer.flipX = false;
-        }
-        else
-        {
-            spriteRenderer.sprite = frontSprite;
-            spriteRenderer.flipX = false;
-        }
+        FacingRight = rawInput.x > 0f;
+        spriteRenderer.sprite = sideSprite;
+        spriteRenderer.flipX = !FacingRight;
     }
 
     void OnMove(InputValue value)

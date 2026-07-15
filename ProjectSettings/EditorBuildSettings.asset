@@ -18,7 +18,10 @@ EditorBuildSettings:
     path: Assets/Scenes/Scene 3.unity
     guid: 99d02be1f0caa1d459f2cec5fa9b16fc
   - enabled: 1
-    path: Assets/Scenes/Scene 4.unity
+    path: Assets/Scenes/Mini Game/Wipe Mini Game.unity
+    guid: 1bc5db28143224493a9ffbca164ed9d1
+  - enabled: 1
+    path: Assets/Scenes/running game.unity
     guid: c06289e1e7fe8784c91c33919a3904d3
   - enabled: 1
     path: Assets/Game Scene/Ending.unity

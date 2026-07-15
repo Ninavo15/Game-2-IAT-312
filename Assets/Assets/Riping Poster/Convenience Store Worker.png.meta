@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: e56dc66b82c2c40b9bfe7ad0c4635c95
+guid: 86e2eda3ed146470baa4c45c9b2886f6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5176332716506918839
-    second: missing poster_0
+      213: 242271577130968298
+    second: Convenience Store Worker_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -113,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: missing poster_0
+      name: Convenience Store Worker_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1298
-        height: 1688
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 50
+        y: 51
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9405f59d1d8f928b0800000000000000
-      internalID: -5176332716506918839
+      spriteID: ae4a01e37b8bc5300800000000000000
+      internalID: 242271577130968298
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      missing poster_0: -5176332716506918839
+      Convenience Store Worker_0: 242271577130968298
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

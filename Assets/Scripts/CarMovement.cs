@@ -12,12 +12,18 @@ public class CarMovement : MonoBehaviour
     public bool introActive;
     public float introDuration = 1f; // how long car drives itself in
 
+    [Header("Auto Drive To Position")]
+    public bool autoDriveToPosition = false;
+    public Vector2 autoDriveTarget;
+    public float autoDriveStopDistance = 0.05f;
 
     public float speed = 5f;
     public float lateralSpeed;
     public float accel = 5f;
     public bool horizontalForward = false;
     public bool lockLateralMovement = false;
+    //left/right input directly drives left/right screen movement
+    public bool directLeftRight = false;
 
     [Header("Stop & Exit")]
     public float stopAtX = 5.6f;
@@ -76,6 +82,11 @@ public class CarMovement : MonoBehaviour
             stopped = true; // block player input
             StartCoroutine(IntroSequence());
         }
+        else if (autoDriveToPosition)
+        {
+            stopped = true; // block player input - this scene drives itself, only E to exit works
+            StartCoroutine(AutoDriveSequence());
+        }
     }
     IEnumerator IntroSequence()
     {
@@ -83,6 +94,7 @@ public class CarMovement : MonoBehaviour
         while (elapsed < introDuration)
         {
             elapsed += Time.fixedDeltaTime;
+<<<<<<< Updated upstream
 
             if (horizontalForward)
             {
@@ -103,6 +115,11 @@ public class CarMovement : MonoBehaviour
             }
             yield return new WaitForFixedUpdate(); 
             
+=======
+            rb.MovePosition(rb.position + Vector2.up * speed * Time.fixedDeltaTime);
+            yield return new WaitForFixedUpdate();
+
+>>>>>>> Stashed changes
         }
         if (!horizontalForward)
         {
@@ -111,11 +128,24 @@ public class CarMovement : MonoBehaviour
         introActive = false;
 
     }
+    IEnumerator AutoDriveSequence()
+    {
+        while (Vector2.Distance(rb.position, autoDriveTarget) > autoDriveStopDistance)
+        {
+            rb.MovePosition(Vector2.MoveTowards(rb.position, autoDriveTarget, speed * Time.fixedDeltaTime));
+            yield return new WaitForFixedUpdate();
+        }
+
+        rb.MovePosition(autoDriveTarget);
+        if (lowFuelUI != null) lowFuelUI.SetActive(true);
+        // stays stopped - the car never responds to player input in this scene, only E to exit
+    }
 
     private void FixedUpdate()
     {
-        if (introActive) return;
-        if (!stopped && horizontalForward && rb.position.x >= stopAtX)
+        // Auto-drive and intro sequences block player input
+        if (introActive || autoDriveToPosition) return;
+        if (!stopped && (horizontalForward || directLeftRight) && rb.position.x >= stopAtX)
         {
             stopped = true;
             if (lowFuelUI != null) lowFuelUI.SetActive(true);
@@ -123,17 +153,26 @@ public class CarMovement : MonoBehaviour
 
         Vector2 targetInput = stopped ? Vector2.zero : rawInput;
 
-        //Debug.Log(smoothedInput);
-        if (smoothedInput.y > 0.1f) 
+        Vector2 nextVec;
+        if (directLeftRight)
         {
-            lateralSpeed = 3f;
-        } else {
-            lateralSpeed = 0f;
+            smoothedInput = Vector2.Lerp(smoothedInput, targetInput, accel * Time.fixedDeltaTime);
+            nextVec = new Vector2(smoothedInput.x * speed, 0f) * Time.fixedDeltaTime;
         }
-        smoothedInput = Vector2.Lerp(smoothedInput, targetInput, accel * Time.fixedDeltaTime);
-        Vector2 nextVec = horizontalForward
-            ? new Vector2(smoothedInput.y * speed, smoothedInput.x * lateralSpeed) * Time.fixedDeltaTime
-            : new Vector2(smoothedInput.x * lateralSpeed, smoothedInput.y * speed) * Time.fixedDeltaTime;
+        else
+        {
+            //Debug.Log(smoothedInput);
+            if (smoothedInput.y > 0.1f)
+            {
+                lateralSpeed = 3f;
+            } else {
+                lateralSpeed = 0f;
+            }
+            smoothedInput = Vector2.Lerp(smoothedInput, targetInput, accel * Time.fixedDeltaTime);
+            nextVec = horizontalForward
+                ? new Vector2(smoothedInput.y * speed, smoothedInput.x * lateralSpeed) * Time.fixedDeltaTime
+                : new Vector2(smoothedInput.x * lateralSpeed, smoothedInput.y * speed) * Time.fixedDeltaTime;
+        }
 
         if (rectTransform != null)
         {
@@ -148,7 +187,7 @@ public class CarMovement : MonoBehaviour
     }
     void UpdateEngineSound()
     {
-        float throttle = Mathf.Clamp01(smoothedInput.y);
+        float throttle = directLeftRight ? Mathf.Abs(smoothedInput.x) : Mathf.Clamp01(smoothedInput.y);
 
         engineSound.volume = Mathf.Lerp(minVolume, maxVolume, throttle);
         engineSound.pitch = Mathf.Lerp(minPitch, maxPitch, throttle);
