@@ -26,6 +26,15 @@ public class Interactable : MonoBehaviour
         playerInRange = true;
     }
 
+    // Catches the case where the player is teleported directly into an
+    // already-overlapping trigger (e.g. returning from a mini-game) - a
+    // teleport like that doesn't always fire OnTriggerEnter2D.
+    void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.GetComponent<CharacterMovement>() == null) return;
+        playerInRange = true;
+    }
+
     void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.GetComponent<CharacterMovement>() == null) return;

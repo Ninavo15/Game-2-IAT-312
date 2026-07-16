@@ -42,12 +42,12 @@ public class CharacterMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector2 nextPos = rb.position + new Vector2(rawInput.x, 0f) * speed * Time.fixedDeltaTime;
+        // Freeze movement while a dialogue line or scene fade is playing.
+        Vector2 moveInput = (DialogueController.IsActive || Fading.IsFading) ? Vector2.zero : rawInput;
+
+        Vector2 nextPos = rb.position + new Vector2(moveInput.x, 0f) * speed * Time.fixedDeltaTime;
         rb.MovePosition(nextPos);
-        if (!mirror)
-        {
-            UpdateSprite();
-        }
+        UpdateSprite(moveInput);
     }
     private void Update()
     {
@@ -78,12 +78,12 @@ public class CharacterMovement : MonoBehaviour
             }
         }
     }
-    void UpdateSprite()
+
+    void UpdateSprite(Vector2 moveInput)
     {
+        if (moveInput.x == 0f) return;
 
-        if (rawInput.x == 0f) return;
-
-        FacingRight = rawInput.x > 0f;
+        FacingRight = moveInput.x > 0f;
         spriteRenderer.sprite = sideSprite;
         spriteRenderer.flipX = !FacingRight;
     }
