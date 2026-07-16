@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Wipping : MonoBehaviour
 {
@@ -8,6 +9,10 @@ public class Wipping : MonoBehaviour
     public SpriteRenderer stainRenderer; // bounds used to check the cursor is over the car
     public WipeCursor cursor;
     public Camera cam;
+
+    [Header("Scene Transition")]
+    public Fading fade;
+    public string sceneToLoad = "Scene 3";
 
     [Header("UI (optional)")]
     public UnityEngine.UI.Text timerText;
@@ -53,17 +58,14 @@ public class Wipping : MonoBehaviour
         if (timerText != null) timerDefaultColor = timerText.color;
 
         SetPlayingVisible(false);
-        StartCoroutine(RunRounds());
+        StartCoroutine(RunGame());
     }
 
-    IEnumerator RunRounds()
+    IEnumerator RunGame()
     {
-        while (true)
-        {
-            yield return StartCoroutine(WaitForStart());
-            yield return StartCoroutine(PlayCountdown());
-            yield return StartCoroutine(RunSingleRound());
-        }
+        yield return StartCoroutine(WaitForStart());
+        yield return StartCoroutine(PlayCountdown());
+        yield return StartCoroutine(RunSingleRound());
     }
 
     // Wired to the start button's OnClick.
@@ -155,8 +157,18 @@ public class Wipping : MonoBehaviour
 
         if (resultOverlay != null) resultOverlay.SetActive(false);
 
-        // outcome: the blood was never really removed.
         StressSystem.AddPoint(1);
+
+        CarWashState.Cleaned = success;
+        CarWashState.Played = true;
+
+        if (fade != null)
+        {
+            fade.FadeOut();
+            yield return new WaitForSeconds(fade.fadeDuration);
+        }
+
+        if (!string.IsNullOrEmpty(sceneToLoad)) SceneManager.LoadScene(sceneToLoad);
     }
 
     void ShowResult(bool success)

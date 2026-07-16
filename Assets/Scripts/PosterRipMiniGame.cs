@@ -62,6 +62,7 @@ public class PosterRipMiniGame : MonoBehaviour
     float timeRemaining;
     int heartsRemaining;
     bool heartLostThisCheck;
+    bool wasChecking;
     CharacterMovement characterMovement;
     Color timerDefaultColor;
     Coroutine handFlashRoutine;
@@ -135,10 +136,17 @@ public class PosterRipMiniGame : MonoBehaviour
             return;
         }
 
-        // Once the worker turns back away, a new check is allowed to cost a heart again.
+        // Only reset right when the worker turns back to Safe (edge-triggered) -
+        // calling Hide() every frame while not checking would cancel WorkerAI's
+        // own warning countdown, which also runs while IsChecking is still false.
         bool checking = worker != null && worker.IsChecking;
-        if (!checking)
+        if (checking)
         {
+            wasChecking = true;
+        }
+        else if (wasChecking)
+        {
+            wasChecking = false;
             heartLostThisCheck = false;
             if (exclamationMark != null) exclamationMark.Hide();
         }
@@ -261,6 +269,7 @@ public class PosterRipMiniGame : MonoBehaviour
         StartCoroutine(ShowResultThenProceed("WIN", "The poster is being removed", () =>
         {
             PosterState.Removed = true;
+            PosterState.Attempted = true;
             if (winTransition != null) winTransition.ShowThenLoad(winLine);
         }));
     }
@@ -277,6 +286,7 @@ public class PosterRipMiniGame : MonoBehaviour
 
         StartCoroutine(ShowResultThenProceed("LOSE", "the poster still there, your stress level up", () =>
         {
+            PosterState.Attempted = true;
             if (timeUpTransition != null) timeUpTransition.ShowThenLoad(timeUpLine);
         }));
     }
@@ -293,6 +303,7 @@ public class PosterRipMiniGame : MonoBehaviour
 
         StartCoroutine(ShowResultThenProceed("LOSE", "You being caught by the worker", () =>
         {
+            PosterState.Attempted = true;
             if (caughtTransition != null) caughtTransition.ShowThenLoad(caughtLine);
         }));
     }

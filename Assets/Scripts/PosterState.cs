@@ -8,4 +8,8 @@ public static class PosterState
     public static bool Removed;
     public static bool ReturnedFromMiniGame;
     public static Vector2 ReturnPosition;
+
+    // True once the ripping mini-game has been played at all (win or lose) -
+    // used to stop offering the poster's interact prompt again afterward.
+    public static bool Attempted;
 }

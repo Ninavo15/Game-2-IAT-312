@@ -16,6 +16,15 @@ public class Fading : MonoBehaviour
         IsFading = false; // fresh scene, fresh state - never trust leftovers from the last scene
     }
 
+    // If this object is destroyed (scene unload) while FadeCanvasGroup is
+    // mid-wait, that coroutine never reaches its own "IsFading = false" line.
+    // Awake() covers the next scene as long as it has its own Fading
+    // component; this covers the gap in between regardless.
+    private void OnDestroy()
+    {
+        IsFading = false;
+    }
+
     private void Start()
     {
         if (fadeIn)

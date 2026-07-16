@@ -13,6 +13,12 @@ public class DialogueController : MonoBehaviour
 
     Coroutine current;
 
+    // Interactable prompt in every future scene. Force it clear here instead.
+    void OnDestroy()
+    {
+        IsActive = false;
+    }
+
     public void ShowLine(string line)
     {
         ShowLine(line, displayDuration);

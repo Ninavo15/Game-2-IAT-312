@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 700000006}
   - component: {fileID: 900000009}
   - component: {fileID: 900000010}
+  - component: {fileID: 950000210}
   m_Layer: 0
   m_Name: Car
   m_TagString: Player
@@ -252,6 +253,7 @@ GameObject:
   - component: {fileID: 950000106}
   - component: {fileID: 950000107}
   - component: {fileID: 950000109}
+  - component: {fileID: 950000211}
   m_Layer: 0
   m_Name: missing poster (1)_0
   m_TagString: Untagged
@@ -1848,6 +1850,18 @@ MonoBehaviour:
   onInteract:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 950000130}
+        m_TargetAssemblyTypeName: ReturnPositionRecorder, Assembly-CSharp
+        m_MethodName: RecordReturnPosition
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument:
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 555000020}
         m_TargetAssemblyTypeName: SceneTransitionAfterDialogue, Assembly-CSharp
         m_MethodName: ShowThenLoad
@@ -2142,7 +2156,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 950000130}
         m_TargetAssemblyTypeName: ReturnPositionRecorder, Assembly-CSharp
-        m_MethodName: RecordFromPoster
+        m_MethodName: RecordReturnPosition
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2369,6 +2383,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1163443946}
   - component: {fileID: 1163443947}
+  - component: {fileID: 950000200}
   m_Layer: 0
   m_Name: car bloody side
   m_TagString: Untagged
@@ -2450,6 +2465,19 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &950000200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1163443945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84345c2ab6b04ba6a42a0e2983919c02, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  cleanSprite: {fileID: 21300000, guid: 78310119a8bae4a52a3bde617849cc2b, type: 3}
 --- !u!1 &1363348319
 GameObject:
   m_ObjectHideFlags: 0
@@ -3541,6 +3569,30 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2096583136}
   m_CullTransparentMesh: 1
+--- !u!114 &950000210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 142649906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeae30d7687044f88f9ca33d20a41e95, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+--- !u!114 &950000211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 290872796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3440c8d058dd14674971d5e636877787, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
