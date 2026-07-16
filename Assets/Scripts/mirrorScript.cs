@@ -87,7 +87,7 @@ public class mirrorScript : MonoBehaviour
             yield return new WaitForSeconds(1f);
             t--;
         }
-        countdownText.text = "GO!";
+        countdownText.text = "TOO LATE";
         yield return new WaitForSeconds(0.5f);
         countdownText.gameObject.SetActive(false);
         // start gameplay here
