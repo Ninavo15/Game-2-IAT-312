@@ -189,8 +189,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: You need to pump gas for your car and keep in at green zone in the gas
-    meter
+  m_Text: You need to pump gas for your car and keep in green zone in the gas threshold
 --- !u!222 &8624168
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -216,7 +215,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &32894095
 RectTransform:
   m_ObjectHideFlags: 0

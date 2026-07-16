@@ -655,7 +655,7 @@ Transform:
   m_GameObject: {fileID: 809136081}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0, z: -0.7125339, w: 0.70163774}
-  m_LocalPosition: {x: -5.33, y: -2.11, z: 0}
+  m_LocalPosition: {x: -5.33, y: -2.31, z: 0}
   m_LocalScale: {x: 0.061219998, y: 0.061219998, z: 0.061219998}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1736,7 +1736,10 @@ MonoBehaviour:
   frontSprite: {fileID: 21300000, guid: 8fc497a69beee49a5aea806639678ac6, type: 3}
   backSprite: {fileID: 21300000, guid: c0c3d8f0ac9e645a194802623675ff0c, type: 3}
   dialogue: {fileID: 495379796}
-  carMovement: {fileID: 0}
+  washroomDialogue: {fileID: 0}
+  mirrorPic: {fileID: 0}
+  motelEnter: 0
+  prompts: {fileID: 0}
 --- !u!114 &2063893245
 MonoBehaviour:
   m_ObjectHideFlags: 0

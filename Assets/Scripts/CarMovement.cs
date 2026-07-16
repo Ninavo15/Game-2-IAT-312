@@ -56,6 +56,13 @@ public class CarMovement : MonoBehaviour
     RectTransform rectTransform;
 
     public Transform cameraTransform;
+    // Fixed local offset applied once the camera parents to the car at a
+    // "Cam Road" trigger - lets the camera settle at a specific world
+    // position once the car finishes driving, instead of exactly centering
+    // on the car's pivot (which doesn't always match the intended framing).
+    public Vector2 cameraFollowOffset;
+    public float cameraFollowSmoothTime = 1f; // how long the camera eases into the follow offset
+    Coroutine cameraFollowRoutine;
     public string sceneName;
     private bool crashed = false;
 
@@ -84,8 +91,19 @@ public class CarMovement : MonoBehaviour
             GetComponent<PlayerInput>().enabled = false;
             enabled = false; // car has already served its purpose, same as the normal exit-car flow
 
-            // Stay parked where it stopped before the mini-game, not back at its intro spawn point.
-            if (autoDriveToPosition) rb.position = autoDriveTarget;
+            // Stay parked where it stopped before the mini-game, not back at its intro spawn point -
+            // autoDriveTarget doubles as "the car's resting spot" whether it got there via
+            // AutoDriveSequence or the intro-drive sequence.
+            rb.position = autoDriveTarget;
+
+            // Put the camera back where it ended up following the car, not
+            // back at its static scene-load position.
+            if (cameraTransform != null)
+            {
+                float camZ = cameraTransform.localPosition.z;
+                cameraTransform.SetParent(transform, false);
+                cameraTransform.localPosition = new Vector3(cameraFollowOffset.x, cameraFollowOffset.y, camZ);
+            }
 
             if (lowFuelUI != null) lowFuelUI.SetActive(false);
             if (player != null)
@@ -122,7 +140,7 @@ public class CarMovement : MonoBehaviour
                     engineSound.Pause();
                     beerSound.Pause();
                     stopped = true;
-                    spotLight.enabled = false;
+                    if (spotLight != null) spotLight.enabled = false;
                 }
             }
             else
@@ -134,6 +152,10 @@ public class CarMovement : MonoBehaviour
         if (!horizontalForward)
         {
             stopped = false;
+        }
+        else if (lowFuelUI != null)
+        {
+            lowFuelUI.SetActive(true);
         }
         introActive = false;
 
@@ -209,6 +231,7 @@ public class CarMovement : MonoBehaviour
     {
         if(collision.CompareTag("Last Road"))
         {
+            if (cameraFollowRoutine != null) StopCoroutine(cameraFollowRoutine);
             cameraTransform.SetParent(null);
             StartCoroutine(FadeAndLoad(sceneName));
         }
@@ -216,10 +239,16 @@ public class CarMovement : MonoBehaviour
         {
             Debug.Log("Cam Road triggered");
             cameraTransform.SetParent(transform, true);
+            // Ease into the configured follow offset instead of snapping to
+            // it instantly - smooths out the cut from static camera to
+            // riding along with the car.
+            if (cameraFollowRoutine != null) StopCoroutine(cameraFollowRoutine);
+            cameraFollowRoutine = StartCoroutine(SmoothCameraToFollowOffset());
             Debug.Log("Camera parent is now: " + cameraTransform.parent.name);
         }
         if(collision.CompareTag("Ending Road"))
         {
+            if (cameraFollowRoutine != null) StopCoroutine(cameraFollowRoutine);
             cameraTransform.SetParent(null);
             StartCoroutine(FadeAndLoad("Ending 2 (DIE)"));
         }
@@ -244,6 +273,21 @@ public class CarMovement : MonoBehaviour
         fade.FadeOut();
         yield return new WaitForSeconds(fade.fadeDuration);
         SceneManager.LoadScene(sceneName);
+    }
+    IEnumerator SmoothCameraToFollowOffset()
+    {
+        Vector3 startLocal = cameraTransform.localPosition;
+        Vector3 targetLocal = new Vector3(cameraFollowOffset.x, cameraFollowOffset.y, startLocal.z);
+        float elapsed = 0f;
+        while (elapsed < cameraFollowSmoothTime)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.SmoothStep(0f, 1f, elapsed / cameraFollowSmoothTime);
+            cameraTransform.localPosition = Vector3.Lerp(startLocal, targetLocal, t);
+            yield return null;
+        }
+        cameraTransform.localPosition = targetLocal;
+        cameraFollowRoutine = null;
     }
     void OnMove(InputValue value)
     {
