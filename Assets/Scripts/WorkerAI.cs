@@ -19,6 +19,10 @@ public class WorkerAI : MonoBehaviour
     public float rightPositionX = 7.92f;
     public float scaleX = 16.04629f;
 
+    [Header("Warning")]
+    public ExclamationCountdown exclamationMark;
+    public float warningLeadTime = 2f;
+
     public bool IsChecking { get; private set; }
 
     Vector3 baseScale;
@@ -42,30 +46,34 @@ public class WorkerAI : MonoBehaviour
     {
         while (true)
         {
-            // Safe: turned left (mirrored from the default right-facing art).
+            // Safe
             IsChecking = false;
             SetFacingLeft(true);
-            yield return new WaitForSeconds(Random.Range(minSafeDuration, maxSafeDuration));
+            if (exclamationMark != null) exclamationMark.Hide();
 
-            // Checking: turned right (default art orientation). No warning -
-            // the worker just turns; PosterRipMiniGame shows the exclamation
-            // mark only if it actually catches the player mid-rip.
+            float safeDuration = Random.Range(minSafeDuration, maxSafeDuration);
+            float warnLead = Mathf.Min(warningLeadTime, safeDuration);
+            yield return new WaitForSeconds(safeDuration - warnLead);
+
+            // Warn the player before worker turns to check. The warning countdown
+            if (exclamationMark != null) exclamationMark.PlayCountdown(warnLead);
+            yield return new WaitForSeconds(warnLead);
+
+            // warning only shows if PosterRipMiniGame actually catches the player ripping during this window.
             IsChecking = true;
             SetFacingLeft(false);
             yield return new WaitForSeconds(Random.Range(minCheckDuration, maxCheckDuration));
         }
     }
 
-    // Called once the mini-game ends so the loop doesn't keep moving/flipping
+    // Called once the mini-game ends 
     // the worker or toggling the warning icon during the win/caught transition.
     public void StopBehavior()
     {
         StopAllCoroutines();
     }
 
-    // Flips via the transform's own scale rather than SpriteRenderer.flipX so the
-    // turn mirrors in place regardless of whether the sprite's pivot is centered,
-    // and slides to the position matching that facing direction.
+    // Flips 
     void SetFacingLeft(bool faceLeft)
     {
         float sign = faceLeft ? -1f : 1f;
