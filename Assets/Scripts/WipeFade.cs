@@ -43,7 +43,7 @@ public class WipeFade : MonoBehaviour
                 tileObj.transform.SetParent(transform, false);
                 tileObj.transform.localPosition = new Vector3(
                     -localWidth / 2f + (x + 0.5f) * tileLocalWidth,
-                    -localHeight / 2f + (y + 0.3f) * tileLocalHeight,
+                    -localHeight / 2f + (y + 1.1f) * tileLocalHeight,
                     0f);
 
                 SpriteRenderer tileSr = tileObj.AddComponent<SpriteRenderer>();
