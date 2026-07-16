@@ -14,10 +14,12 @@ public class CharacterMovement : MonoBehaviour
     public Sprite backSprite;
     public GameObject dialogue;
     public GameObject washroomDialogue;
+    public GameObject mirrorPic;
 
     public bool motelEnter = false;
     private bool washroom = false;
 
+    
     // True while facing right (the sideSprite's default, unflipped orientation).
     // Persists across sprite swaps so other scripts can read the last real
     // facing direction even while showing a different sprite (e.g. hand up).
@@ -26,6 +28,7 @@ public class CharacterMovement : MonoBehaviour
     Rigidbody2D rb;
     Vector2 rawInput;
     private bool mirror = false;
+    public GameObject prompts;
 
     void Awake()
     {
@@ -54,6 +57,8 @@ public class CharacterMovement : MonoBehaviour
             {
                 SceneManager.LoadScene("Scene 5");
                 Debug.Log("scene 5");
+
+<<<<<<< Updated upstream
             }
         }
         if (washroom)
@@ -65,7 +70,11 @@ public class CharacterMovement : MonoBehaviour
             }
         }
     }
+    void UpdateSprite()
+    {
 
+        if (rawInput.x == 0f) return;
+=======
     void UpdateSprite(Vector2 moveInput)
     {
         if (moveInput.x == 0f) return;
@@ -104,8 +113,6 @@ public class CharacterMovement : MonoBehaviour
         {
             dialogue.SetActive(false);
             motelEnter = false;
-
-
         }
         if (collision.CompareTag("washroom"))
         {
