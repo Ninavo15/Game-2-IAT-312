@@ -1,8 +1,6 @@
 using UnityEngine;
 
-// Drives the "wipping hand" sprite: follows the mouse in world space and
-// hides the OS cursor. Attach to a GameObject with a SpriteRenderer using
-// the wipping hand.png sprite.
+// the wipping sprite.
 public class WipeCursor : MonoBehaviour
 {
     public Camera cam;

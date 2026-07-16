@@ -17,10 +17,11 @@ public class Wipping : MonoBehaviour
     public UnityEngine.UI.Text resultSubtitleText; // detail message
 
     [Header("Start Gate")]
-    public GameObject startOverlay; // shown until the player presses E - car stays visible behind it
+    public GameObject startOverlay; // shown until the player clicks the start button - car stays visible behind it
     public GameObject gameOverlay; // timer + bar + instructions, shown once playing starts
     public GameObject handCursorObject;
-    public KeyCode startKey = KeyCode.E;
+
+    bool startClicked;
 
     [Header("Countdown")]
     public GameObject countdownOverlay; // full-screen panel shown during 3, 2, 1, START
@@ -65,12 +66,19 @@ public class Wipping : MonoBehaviour
         }
     }
 
+    // Wired to the start button's OnClick.
+    public void OnStartButtonClicked()
+    {
+        startClicked = true;
+    }
+
     IEnumerator WaitForStart()
     {
+        startClicked = false;
         if (startOverlay != null) startOverlay.SetActive(true);
         SetPlayingVisible(false);
 
-        while (!Input.GetKeyDown(startKey))
+        while (!startClicked)
         {
             yield return null;
         }

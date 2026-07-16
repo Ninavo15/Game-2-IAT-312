@@ -1,31 +1,34 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-// Hold the mouse button near the poster to rip it down while the worker is
-// turned left (safe)
-// you lose a heart if worker is checking - 3 lose
-// Rip in time limit to win, or lose if time runs out
-[RequireComponent(typeof(Collider2D))]
+// Click the "Click to Rip" button repeatedly (no holding) to rip the poster
+// down while the worker is turned left (safe). The character stays put - no
+// walking around. If you click while the worker is turned right, you lose a
+// heart; losing all hearts (or running out of the time limit) gets you
+// caught. Ripping removes visible pieces of the poster directly, so progress
+// is shown by the poster itself tearing apart.
 public class PosterRipMiniGame : MonoBehaviour
 {
     [Header("References")]
     public WorkerAI worker;
     public PosterTear poster;
-    public ExclamationMarkAnimator exclamationMark; // shown above the worker when caught
+    public ExclamationCountdown exclamationMark; // shown above the worker when caught
 
     [Header("Character Hand Swap")]
     public SpriteRenderer characterSprite;
     public Sprite characterNormalSprite;
     public Sprite characterHandUpSprite;
+    public float handUpFlashDuration = 0.15f;
 
     [Header("UI (optional)")]
-    public GameObject promptText; // "Click to rip poster"
+    public GameObject ripButton; // "Click to Rip" button, shown only while playing
     public UnityEngine.UI.Text timerText;
+    public float timerWarningThreshold = 5f;
+    public Color timerWarningColor = Color.red;
     public UnityEngine.UI.Image[] heartIcons;
 
     [Header("Start Gate")]
-    public GameObject startOverlay; // shown until the player presses E
+    public GameObject startOverlay; // shown until the player clicks the start button
 
     [Header("Countdown")]
     public GameObject countdownOverlay;
@@ -39,9 +42,9 @@ public class PosterRipMiniGame : MonoBehaviour
     public float resultHoldTime = 2.5f;
 
     [Header("Rip Settings")]
-    public float ripRatePerSecond = 0.2f;
+    public float ripPerClick = 0.05f; // 20 clicks to fully rip
     [Range(0f, 1f)] public float successThreshold = 1f;
-    public float timeLimit = 30f; // seconds, once ripping starts - placeholder for now
+    public float timeLimit = 20f; // seconds, once ripping starts - placeholder for now
     public int maxHearts = 3;
 
     [Header("Dialogue + Transition")]
@@ -49,41 +52,53 @@ public class PosterRipMiniGame : MonoBehaviour
     public string winLine = "Got it! Time to get out of here.";
     public SceneTransitionAfterDialogue caughtTransition; // all hearts lost
     public string caughtLine = "Oh no, they saw me!";
-    public SceneTransitionAfterDialogue timeUpTransition; // time ran out, hearts still left
-    public string timeUpLine = "I'm out of time...";
+    public SceneTransitionAfterDialogue timeUpTransition; // time ran out
+    public string timeUpLine = "Shucks, the employer is noticing, I need to stop";
 
-    bool playerInRange;
     bool gameStarted;
+    bool startClicked;
     float ripProgress;
     bool finished;
     float timeRemaining;
     int heartsRemaining;
     bool heartLostThisCheck;
     CharacterMovement characterMovement;
+    Color timerDefaultColor;
+    Coroutine handFlashRoutine;
 
     void Start()
     {
         if (characterSprite != null) characterMovement = characterSprite.GetComponent<CharacterMovement>();
         if (exclamationMark != null) exclamationMark.Hide();
-        if (promptText != null) promptText.SetActive(false);
         if (countdownOverlay != null) countdownOverlay.SetActive(false);
         if (resultOverlay != null) resultOverlay.SetActive(false);
+        if (timerText != null) timerDefaultColor = timerText.color;
         timeRemaining = timeLimit;
         heartsRemaining = maxHearts;
         SetCharacterHandUp(false);
 
+        // The character never moves during this mini-game.
+        if (characterMovement != null) characterMovement.enabled = false;
+
         // Hidden until the countdown finishes - only the start overlay shows at first.
         if (timerText != null) timerText.enabled = false;
         SetHeartIconsVisible(false);
-        if (characterMovement != null) characterMovement.enabled = false;
+        if (ripButton != null) ripButton.SetActive(false);
 
         StartCoroutine(StartSequence());
     }
 
+    // Wired to the start button's OnClick.
+    public void OnStartButtonClicked()
+    {
+        startClicked = true;
+    }
+
     IEnumerator StartSequence()
     {
+        startClicked = false;
         if (startOverlay != null) startOverlay.SetActive(true);
-        while (!(Keyboard.current != null && Keyboard.current[Key.E].wasPressedThisFrame))
+        while (!startClicked)
         {
             yield return null;
         }
@@ -102,32 +117,15 @@ public class PosterRipMiniGame : MonoBehaviour
         UpdateTimerText();
         SetHeartIconsVisible(true);
         UpdateHeartsUI();
-        if (characterMovement != null) characterMovement.enabled = true;
+        if (ripButton != null) ripButton.SetActive(true);
         if (worker != null) worker.StartBehavior();
 
         gameStarted = true;
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.GetComponent<CharacterMovement>() == null) return;
-        playerInRange = true;
-    }
-
-    void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.GetComponent<CharacterMovement>() == null) return;
-        playerInRange = false;
-    }
-
     void Update()
     {
         if (!gameStarted || finished) return;
-
-        bool holding = playerInRange && Mouse.current != null && Mouse.current.leftButton.isPressed;
-
-        if (promptText != null) promptText.SetActive(playerInRange && !holding);
-        SetCharacterHandUp(holding);
 
         timeRemaining -= Time.deltaTime;
         UpdateTimerText();
@@ -137,28 +135,55 @@ public class PosterRipMiniGame : MonoBehaviour
             return;
         }
 
+        // Once the worker turns back away, a new check is allowed to cost a heart again.
         bool checking = worker != null && worker.IsChecking;
+        if (!checking)
+        {
+            heartLostThisCheck = false;
+            if (exclamationMark != null) exclamationMark.Hide();
+        }
+    }
 
+    // Wired to the rip button's OnClick - one click, one small tear.
+    public void OnRipButtonClicked()
+    {
+        if (!gameStarted || finished) return;
+
+        bool checking = worker != null && worker.IsChecking;
         if (checking)
         {
-            if (holding && !heartLostThisCheck)
+            // The worker only notices if the player is actually caught mid-rip.
+            if (exclamationMark != null) exclamationMark.ShowDanger();
+            if (!heartLostThisCheck)
             {
                 heartLostThisCheck = true;
                 LoseHeart();
             }
             return;
         }
-        heartLostThisCheck = false;
 
-        if (!holding) return;
+        FlashHandUp();
 
-        ripProgress = Mathf.Clamp01(ripProgress + ripRatePerSecond * Time.deltaTime);
+        ripProgress = Mathf.Clamp01(ripProgress + ripPerClick);
         if (poster != null) poster.SetProgress(ripProgress);
 
         if (ripProgress >= successThreshold)
         {
             TriggerWin();
         }
+    }
+
+    void FlashHandUp()
+    {
+        if (handFlashRoutine != null) StopCoroutine(handFlashRoutine);
+        handFlashRoutine = StartCoroutine(FlashHandUpRoutine());
+    }
+
+    IEnumerator FlashHandUpRoutine()
+    {
+        SetCharacterHandUp(true);
+        yield return new WaitForSeconds(handUpFlashDuration);
+        SetCharacterHandUp(false);
     }
 
     void SetCharacterHandUp(bool handUp)
@@ -183,6 +208,7 @@ public class PosterRipMiniGame : MonoBehaviour
     {
         if (timerText == null) return;
         timerText.text = Mathf.CeilToInt(Mathf.Max(0f, timeRemaining)).ToString();
+        timerText.color = timeRemaining <= timerWarningThreshold ? timerWarningColor : timerDefaultColor;
     }
 
     void UpdateHeartsUI()
@@ -228,8 +254,8 @@ public class PosterRipMiniGame : MonoBehaviour
     void TriggerWin()
     {
         finished = true;
-        if (promptText != null) promptText.SetActive(false);
         SetCharacterHandUp(false);
+        if (ripButton != null) ripButton.SetActive(false);
         if (worker != null) worker.StopBehavior();
 
         StartCoroutine(ShowResultThenProceed("WIN", "The poster is being removed", () =>
@@ -244,8 +270,8 @@ public class PosterRipMiniGame : MonoBehaviour
     void TriggerTimeUp()
     {
         finished = true;
-        if (promptText != null) promptText.SetActive(false);
         SetCharacterHandUp(false);
+        if (ripButton != null) ripButton.SetActive(false);
         if (worker != null) worker.StopBehavior();
         StressSystem.AddPoint(1);
 
@@ -259,10 +285,10 @@ public class PosterRipMiniGame : MonoBehaviour
     void TriggerCaughtByWorker()
     {
         finished = true;
-        if (promptText != null) promptText.SetActive(false);
         SetCharacterHandUp(false);
+        if (ripButton != null) ripButton.SetActive(false);
         if (worker != null) worker.StopBehavior();
-        if (exclamationMark != null) exclamationMark.Show();
+        if (exclamationMark != null) exclamationMark.ShowDanger();
         StressSystem.AddPoint(1);
 
         StartCoroutine(ShowResultThenProceed("LOSE", "You being caught by the worker", () =>

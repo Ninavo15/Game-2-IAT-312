@@ -24,6 +24,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Mini Game/Ripping poster.unity
     guid: d3ad981d9bb7b43458cc58479fdbcaf8
   - enabled: 1
+    path: Assets/Scenes/Mini Game/Selection Object.unity
+    guid: b8ba199e63e62487889cc89a87123303
+  - enabled: 1
     path: Assets/Scenes/running game.unity
     guid: c06289e1e7fe8784c91c33919a3904d3
   - enabled: 1
@@ -41,5 +44,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Scene 5.unity
     guid: 120f52fc5cf1f3e419bd9f25c60a3d3d
+  - enabled: 1
+    path: Assets/Scenes/Scene 4.unity
+    guid: 046284b90942c49688f18e81d4f4031c
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

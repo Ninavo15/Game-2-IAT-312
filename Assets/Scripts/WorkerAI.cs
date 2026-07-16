@@ -19,10 +19,6 @@ public class WorkerAI : MonoBehaviour
     public float rightPositionX = 7.92f;
     public float scaleX = 16.04629f;
 
-    [Header("Warning")]
-    public ExclamationMarkAnimator exclamationMark;
-    public float warningLeadTime = 2f;
-
     public bool IsChecking { get; private set; }
 
     Vector3 baseScale;
@@ -49,20 +45,13 @@ public class WorkerAI : MonoBehaviour
             // Safe: turned left (mirrored from the default right-facing art).
             IsChecking = false;
             SetFacingLeft(true);
-            if (exclamationMark != null) exclamationMark.Hide();
+            yield return new WaitForSeconds(Random.Range(minSafeDuration, maxSafeDuration));
 
-            float safeDuration = Random.Range(minSafeDuration, maxSafeDuration);
-            float warnLead = Mathf.Min(warningLeadTime, safeDuration);
-            yield return new WaitForSeconds(safeDuration - warnLead);
-
-            // Warn the player shortly before the worker turns to check.
-            if (exclamationMark != null) exclamationMark.Show();
-            yield return new WaitForSeconds(warnLead);
-
-            // Checking: turned right (default art orientation).
+            // Checking: turned right (default art orientation). No warning -
+            // the worker just turns; PosterRipMiniGame shows the exclamation
+            // mark only if it actually catches the player mid-rip.
             IsChecking = true;
             SetFacingLeft(false);
-            if (exclamationMark != null) exclamationMark.Hide();
             yield return new WaitForSeconds(Random.Range(minCheckDuration, maxCheckDuration));
         }
     }
