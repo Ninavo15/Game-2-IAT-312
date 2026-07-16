@@ -204,6 +204,10 @@ public class CarMovement : MonoBehaviour
             cameraTransform.SetParent(null);
             StartCoroutine(FadeAndLoad("Ending 2 (DIE)"));
         }
+        if (collision.CompareTag("motel"))
+        {
+            player.SetActive(true);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

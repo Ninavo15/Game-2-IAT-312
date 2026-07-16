@@ -12,6 +12,9 @@ TagManager:
   - dear
   - ekeys
   - Ghost
+  - motel
+  - washroom
+  - mirror
   layers:
   - Default
   - TransparentFX

@@ -1,5 +1,8 @@
+using Unity.VectorGraphics;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class CharacterMovement : MonoBehaviour
 {
@@ -9,6 +12,11 @@ public class CharacterMovement : MonoBehaviour
     public Sprite sideSprite;
     public Sprite frontSprite;
     public Sprite backSprite;
+    public GameObject dialogue;
+    public GameObject washroomDialogue;
+
+    public bool motelEnter = false;
+    private bool washroom = false;
 
     // True while facing right (the sideSprite's default, unflipped orientation).
     // Persists across sprite swaps so other scripts can read the last real
@@ -17,6 +25,7 @@ public class CharacterMovement : MonoBehaviour
 
     Rigidbody2D rb;
     Vector2 rawInput;
+    private bool mirror = false;
 
     void Awake()
     {
@@ -34,9 +43,29 @@ public class CharacterMovement : MonoBehaviour
         rb.MovePosition(nextPos);
         UpdateSprite();
     }
+    private void Update()
+    {
+        if (motelEnter)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                SceneManager.LoadScene("Scene 5");
+                Debug.Log("scene 5");
 
+            }
+        }
+        if (washroom)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                Debug.Log("wash");
+                transform.position = new Vector2(2.94f, -1.34f);
+            }
+        }
+    }
     void UpdateSprite()
     {
+
         if (rawInput.x == 0f) return;
 
         FacingRight = rawInput.x > 0f;
@@ -47,5 +76,45 @@ public class CharacterMovement : MonoBehaviour
     void OnMove(InputValue value)
     {
         rawInput = value.Get<Vector2>();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("motel"))
+        {
+            dialogue.SetActive(true);
+            motelEnter = true;
+        }
+        if(collision.CompareTag("washroom"))
+        {
+            dialogue.SetActive(true);
+            washroom = true;
+        }
+        if (collision.CompareTag("mirror"))
+        {
+            washroomDialogue.SetActive(true);
+            mirror = true;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if(collision.CompareTag("motel"))
+        {
+            dialogue.SetActive(false);
+            motelEnter = false;
+
+
+        }
+        if (collision.CompareTag("washroom"))
+        {
+            dialogue.SetActive(false);
+            washroom = false;
+        }
+        if (collision.CompareTag("mirror"))
+        {
+            washroomDialogue.SetActive(false);
+            mirror = false;
+        }
+
     }
 }

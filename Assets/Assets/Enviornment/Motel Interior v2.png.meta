@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 97ebc0baaee604119b27d7751929ffc4
+guid: 27e21c56f2d9b7d458d796d1fc75062b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4537592600265150271
-    second: ChatGPT_Image_Jul_14__2026__01_29_21_PM-removebg-preview_0
+      213: 1040204841345002964
+    second: Motel Interior v2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -85,19 +85,6 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
     buildTarget: Standalone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -126,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ChatGPT_Image_Jul_14__2026__01_29_21_PM-removebg-preview_0
+      name: Motel Interior v2_0
       rect:
         serializedVersion: 2
-        x: 42
-        y: 80
-        width: 525
-        height: 233
+        x: 0
+        y: 0
+        width: 256
+        height: 144
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1c031cd329b3701c0800000000000000
-      internalID: -4537592600265150271
+      spriteID: 4dda20ebacc8f6e00800000000000000
+      internalID: 1040204841345002964
       vertices: []
       indices: 
       edges: []
@@ -161,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ChatGPT_Image_Jul_14__2026__01_29_21_PM-removebg-preview_0: -4537592600265150271
+      Motel Interior v2_0: 1040204841345002964
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
