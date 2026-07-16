@@ -39,9 +39,12 @@ public class CharacterMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector2 nextPos = rb.position + new Vector2(rawInput.x, 0f) * speed * Time.fixedDeltaTime;
+        // Freeze movement while a dialogue line or scene fade is playing.
+        Vector2 moveInput = (DialogueController.IsActive || Fading.IsFading) ? Vector2.zero : rawInput;
+
+        Vector2 nextPos = rb.position + new Vector2(moveInput.x, 0f) * speed * Time.fixedDeltaTime;
         rb.MovePosition(nextPos);
-        UpdateSprite();
+        UpdateSprite(moveInput);
     }
     private void Update()
     {
@@ -52,6 +55,7 @@ public class CharacterMovement : MonoBehaviour
                 SceneManager.LoadScene("Scene 5");
                 Debug.Log("scene 5");
 
+<<<<<<< Updated upstream
             }
         }
         if (washroom)
@@ -67,8 +71,13 @@ public class CharacterMovement : MonoBehaviour
     {
 
         if (rawInput.x == 0f) return;
+=======
+    void UpdateSprite(Vector2 moveInput)
+    {
+        if (moveInput.x == 0f) return;
+>>>>>>> Stashed changes
 
-        FacingRight = rawInput.x > 0f;
+        FacingRight = moveInput.x > 0f;
         spriteRenderer.sprite = sideSprite;
         spriteRenderer.flipX = !FacingRight;
     }

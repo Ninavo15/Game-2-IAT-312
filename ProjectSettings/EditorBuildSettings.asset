@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Game Scene/Menu.unity
+    path: Assets/Scenes/Game Scene/Menu.unity
     guid: 1df2066969b48465f8b035031d96cb20
   - enabled: 1
     path: Assets/Scenes/Scene 1.unity
@@ -21,16 +21,19 @@ EditorBuildSettings:
     path: Assets/Scenes/Mini Game/Wipe Mini Game.unity
     guid: 1bc5db28143224493a9ffbca164ed9d1
   - enabled: 1
+    path: Assets/Scenes/Mini Game/Ripping poster.unity
+    guid: d3ad981d9bb7b43458cc58479fdbcaf8
+  - enabled: 1
     path: Assets/Scenes/running game.unity
     guid: c06289e1e7fe8784c91c33919a3904d3
   - enabled: 1
-    path: Assets/Game Scene/Ending.unity
+    path: Assets/Scenes/Game Scene/Ending.unity
     guid: 67f4c507f9c5e4dd3b0c06618b5d32f9
   - enabled: 1
-    path: Assets/Game Scene/Ending 1 (CAPTURE).unity
+    path: Assets/Scenes/Game Scene/Ending 1 (CAPTURE).unity
     guid: 26e4e74fc807d4980a9db488813e4890
   - enabled: 1
-    path: Assets/Game Scene/Ending 2 (DIE).unity
+    path: Assets/Scenes/Game Scene/Ending 2 (DIE).unity
     guid: 1b0c56689c2ba417e8a9c2e11e8aa636
   - enabled: 1
     path: Assets/Scenes/Transition SIde.unity

@@ -10,7 +10,7 @@ public class CarMovement : MonoBehaviour
 
     [Header("Intro Sequence")]
     public bool introActive;
-    public float introDuration = 1f; // how long car drives itself in
+    public float introDuration = 1f; // how long car drives auto
 
     [Header("Auto Drive To Position")]
     public bool autoDriveToPosition = false;
@@ -22,7 +22,6 @@ public class CarMovement : MonoBehaviour
     public float accel = 5f;
     public bool horizontalForward = false;
     public bool lockLateralMovement = false;
-    //left/right input directly drives left/right screen movement
     public bool directLeftRight = false;
 
     [Header("Stop & Exit")]
@@ -77,6 +76,23 @@ public class CarMovement : MonoBehaviour
     }
     private void Start()
     {
+        if (PosterState.ReturnedFromMiniGame)
+        {
+            PosterState.ReturnedFromMiniGame = false; // consume - don't affect a later fresh visit
+            engineSound.Stop();
+            beerSound.Stop();
+            GetComponent<PlayerInput>().enabled = false;
+            enabled = false; // car has already served its purpose, same as the normal exit-car flow
+
+            if (lowFuelUI != null) lowFuelUI.SetActive(false);
+            if (player != null)
+            {
+                player.SetActive(true);
+                player.transform.position = PosterState.ReturnPosition;
+            }
+            return;
+        }
+
         if (introActive)
         {
             stopped = true; // block player input

@@ -34,8 +34,11 @@ public class WorkerAI : MonoBehaviour
         basePosition = transform.localPosition;
     }
 
-    void Start()
+    // Doesn't auto-start - PosterRipMiniGame calls StartBehavior() once the
+    // start overlay + countdown are done.
+    public void StartBehavior()
     {
+        StopAllCoroutines();
         StartCoroutine(AttentionLoop());
     }
 
