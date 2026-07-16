@@ -54,8 +54,6 @@ public class CharacterMovement : MonoBehaviour
             {
                 SceneManager.LoadScene("Scene 5");
                 Debug.Log("scene 5");
-
-<<<<<<< Updated upstream
             }
         }
         if (washroom)
@@ -67,15 +65,10 @@ public class CharacterMovement : MonoBehaviour
             }
         }
     }
-    void UpdateSprite()
-    {
 
-        if (rawInput.x == 0f) return;
-=======
     void UpdateSprite(Vector2 moveInput)
     {
         if (moveInput.x == 0f) return;
->>>>>>> Stashed changes
 
         FacingRight = moveInput.x > 0f;
         spriteRenderer.sprite = sideSprite;
