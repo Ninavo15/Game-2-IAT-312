@@ -58,7 +58,7 @@ public class CharacterMovement : MonoBehaviour
                 SceneManager.LoadScene("Scene 5");
                 Debug.Log("scene 5");
 
-<<<<<<< Updated upstream
+
             }
         }
         if (washroom)
@@ -69,12 +69,19 @@ public class CharacterMovement : MonoBehaviour
                 transform.position = new Vector2(2.94f, -1.34f);
             }
         }
-    }
-    void UpdateSprite()
-    {
 
-        if (rawInput.x == 0f) return;
-=======
+        if (mirror)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                Debug.Log("mirror");
+                mirrorPic.SetActive(true);
+                washroomDialogue.SetActive(false);
+            }
+        }
+    }
+
+
     void UpdateSprite(Vector2 moveInput)
     {
         if (moveInput.x == 0f) return;

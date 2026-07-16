@@ -1,0 +1,730 @@
+fileFormatVersion: 2
+guid: 84b7cd31eb0b281489643dce62976c84
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6644327115095958310
+    second: motel bathroom anim_0
+  - first:
+      213: -3142325673662344191
+    second: motel bathroom anim_1
+  - first:
+      213: -290048082171335714
+    second: motel bathroom anim_2
+  - first:
+      213: 6696638924199888767
+    second: motel bathroom anim_3
+  - first:
+      213: 1002805457654127937
+    second: motel bathroom anim_4
+  - first:
+      213: 5633898163323193851
+    second: motel bathroom anim_5
+  - first:
+      213: 1857998937221319000
+    second: motel bathroom anim_6
+  - first:
+      213: 4974793664329252805
+    second: motel bathroom anim_7
+  - first:
+      213: -481787974589574897
+    second: motel bathroom anim_8
+  - first:
+      213: -5021446455579067729
+    second: motel bathroom anim_9
+  - first:
+      213: 3546695737937465643
+    second: motel bathroom anim_10
+  - first:
+      213: -1312135643025058633
+    second: motel bathroom anim_11
+  - first:
+      213: 3638239649579948871
+    second: motel bathroom anim_12
+  - first:
+      213: -5209284532050728979
+    second: motel bathroom anim_13
+  - first:
+      213: 3881187183656895493
+    second: motel bathroom anim_14
+  - first:
+      213: -2473325072144677811
+    second: motel bathroom anim_15
+  - first:
+      213: 3581114820823171504
+    second: motel bathroom anim_16
+  - first:
+      213: -259491481243738772
+    second: motel bathroom anim_17
+  - first:
+      213: -6548930446699252651
+    second: motel bathroom anim_18
+  - first:
+      213: -9141719658444293049
+    second: motel bathroom anim_19
+  - first:
+      213: 8911479136954263872
+    second: motel bathroom anim_20
+  - first:
+      213: 6243153794591914086
+    second: motel bathroom anim_21
+  - first:
+      213: -5361290498021886063
+    second: motel bathroom anim_22
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: motel bathroom anim_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6236acade44653c50800000000000000
+      internalID: 6644327115095958310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: motel bathroom anim_1
+      rect:
+        serializedVersion: 2
+        x: 266
+        y: 0
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 10414c4d2773464d0800000000000000
+      internalID: -3142325673662344191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: motel bathroom anim_2
+      rect:
+        serializedVersion: 2
+        x: 532
+        y: 0
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: edbe4665eca89fbf0800000000000000
+      internalID: -290048082171335714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: motel bathroom anim_3
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 0
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f770df90f9d3fec50800000000000000
+      internalID: 6696638924199888767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: motel bathroom anim_4
+      rect:
+        serializedVersion: 2
+        x: 1064
+        y: 0
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14d1c4a204eaaed00800000000000000
+      internalID: 1002805457654127937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: motel bathroom anim_5
+      rect:
+        serializedVersion: 2
+        x: 1330
+        y: 0
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf9ca95a780af2e40800000000000000
+      internalID: 5633898163323193851
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: motel bathroom anim_6
+      rect:
+        serializedVersion: 2
+        x: 1596
+        y: 0
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85941267030f8c910800000000000000
+      internalID: 1857998937221319000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: motel bathroom anim_7
+      rect:
+        serializedVersion: 2
+        x: 1862
+        y: 0
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5cf7539ea740a0540800000000000000
+      internalID: 4974793664329252805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: motel bathroom anim_8
+      rect:
+        serializedVersion: 2
+        x: 2128
+        y: 0
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f019885c3685059f0800000000000000
+      internalID: -481787974589574897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: motel bathroom anim_9
+      rect:
+        serializedVersion: 2
+        x: 2394
+        y: 0
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: faab09cad0d305ab0800000000000000
+      internalID: -5021446455579067729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: motel bathroom anim_10
+      rect:
+        serializedVersion: 2
+        x: 2660
+        y: 0
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b2197228bf4683130800000000000000
+      internalID: 3546695737937465643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: motel bathroom anim_11
+      rect:
+        serializedVersion: 2
+        x: 2926
+        y: 0
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b4dc5ca59b5acde0800000000000000
+      internalID: -1312135643025058633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: motel bathroom anim_12
+      rect:
+        serializedVersion: 2
+        x: 3192
+        y: 0
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74b54f06faf9d7230800000000000000
+      internalID: 3638239649579948871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: motel bathroom anim_13
+      rect:
+        serializedVersion: 2
+        x: 3458
+        y: 0
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de7ed2d6157e4b7b0800000000000000
+      internalID: -5209284532050728979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: motel bathroom anim_14
+      rect:
+        serializedVersion: 2
+        x: 3724
+        y: 0
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5040bac1e2fbcd530800000000000000
+      internalID: 3881187183656895493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: motel bathroom anim_15
+      rect:
+        serializedVersion: 2
+        x: 3990
+        y: 0
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d44cfbc73fbfcadd0800000000000000
+      internalID: -2473325072144677811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: motel bathroom anim_16
+      rect:
+        serializedVersion: 2
+        x: 4256
+        y: 0
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b14d0bb4fca2b130800000000000000
+      internalID: 3581114820823171504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: motel bathroom anim_17
+      rect:
+        serializedVersion: 2
+        x: 4522
+        y: 0
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6d1a366fd9166cf0800000000000000
+      internalID: -259491481243738772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: motel bathroom anim_18
+      rect:
+        serializedVersion: 2
+        x: 4788
+        y: 0
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55430c9d4768d15a0800000000000000
+      internalID: -6548930446699252651
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: motel bathroom anim_19
+      rect:
+        serializedVersion: 2
+        x: 5054
+        y: 0
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74cf832d766122180800000000000000
+      internalID: -9141719658444293049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: motel bathroom anim_20
+      rect:
+        serializedVersion: 2
+        x: 5320
+        y: 0
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 049a67d5f0febab70800000000000000
+      internalID: 8911479136954263872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: motel bathroom anim_21
+      rect:
+        serializedVersion: 2
+        x: 5586
+        y: 0
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66878cc6c4324a650800000000000000
+      internalID: 6243153794591914086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: motel bathroom anim_22
+      rect:
+        serializedVersion: 2
+        x: 5852
+        y: 0
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1977ab782bed895b0800000000000000
+      internalID: -5361290498021886063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5cb7da071e4fa714880d2016adb16b78
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":256.0,"y":144.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":10.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      motel bathroom anim_0: 6644327115095958310
+      motel bathroom anim_1: -3142325673662344191
+      motel bathroom anim_10: 3546695737937465643
+      motel bathroom anim_11: -1312135643025058633
+      motel bathroom anim_12: 3638239649579948871
+      motel bathroom anim_13: -5209284532050728979
+      motel bathroom anim_14: 3881187183656895493
+      motel bathroom anim_15: -2473325072144677811
+      motel bathroom anim_16: 3581114820823171504
+      motel bathroom anim_17: -259491481243738772
+      motel bathroom anim_18: -6548930446699252651
+      motel bathroom anim_19: -9141719658444293049
+      motel bathroom anim_2: -290048082171335714
+      motel bathroom anim_20: 8911479136954263872
+      motel bathroom anim_21: 6243153794591914086
+      motel bathroom anim_22: -5361290498021886063
+      motel bathroom anim_3: 6696638924199888767
+      motel bathroom anim_4: 1002805457654127937
+      motel bathroom anim_5: 5633898163323193851
+      motel bathroom anim_6: 1857998937221319000
+      motel bathroom anim_7: 4974793664329252805
+      motel bathroom anim_8: -481787974589574897
+      motel bathroom anim_9: -5021446455579067729
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
