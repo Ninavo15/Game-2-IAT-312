@@ -12,7 +12,7 @@ public class Wipping : MonoBehaviour
     [Header("UI (optional)")]
     public UnityEngine.UI.Text timerText;
     public UnityEngine.UI.Image progressBarFill;
-    public GameObject resultOverlay; // Lose Win screen, shown after the round ends
+    public GameObject resultOverlay; // Lose Win screen
     public UnityEngine.UI.Text resultTitleText; // "Win" / "Lose"
     public UnityEngine.UI.Text resultSubtitleText; // detail message
 
@@ -134,7 +134,7 @@ public class Wipping : MonoBehaviour
             if (stain.GetWipedFraction() >= successThreshold)
             {
                 success = true;
-                stain.CompleteWipe(); // snap to fully clean, even any missed spots
+                stain.CompleteWipe(); // snap to fully clean
                 break;
             }
 
@@ -147,7 +147,7 @@ public class Wipping : MonoBehaviour
 
         if (resultOverlay != null) resultOverlay.SetActive(false);
 
-        // Regardless of outcome, the blood was never really removed.
+        // outcome: the blood was never really removed.
         StressSystem.AddPoint(1);
     }
 

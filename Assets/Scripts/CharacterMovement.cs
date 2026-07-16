@@ -20,9 +20,7 @@ public class CharacterMovement : MonoBehaviour
     private bool washroom = false;
 
     
-    // True while facing right (the sideSprite's default, unflipped orientation).
-    // Persists across sprite swaps so other scripts can read the last real
-    // facing direction even while showing a different sprite (e.g. hand up).
+
     public bool FacingRight { get; private set; } = true;
 
     Rigidbody2D rb;
@@ -81,6 +79,8 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
+
+    
 
     void UpdateSprite(Vector2 moveInput)
     {

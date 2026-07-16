@@ -84,6 +84,9 @@ public class CarMovement : MonoBehaviour
             GetComponent<PlayerInput>().enabled = false;
             enabled = false; // car has already served its purpose, same as the normal exit-car flow
 
+            // Stay parked where it stopped before the mini-game, not back at its intro spawn point.
+            if (autoDriveToPosition) rb.position = autoDriveTarget;
+
             if (lowFuelUI != null) lowFuelUI.SetActive(false);
             if (player != null)
             {
