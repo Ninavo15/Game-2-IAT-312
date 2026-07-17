@@ -14062,6 +14062,7 @@ MonoBehaviour:
   directLeftRight: 0
   stopAtX: 5.6
   lowFuelUI: {fileID: 0}
+  arriveOverlay: {fileID: 0}
   player: {fileID: 0}
   exitOffset: {x: -6.5858803, y: -2.5}
   engineSound: {fileID: 1851942884}
@@ -14070,6 +14071,10 @@ MonoBehaviour:
   beerClip: {fileID: 8300000, guid: d24ccacf3028ad14d912d1b8b9ce2fb8, type: 3}
   crashClip: {fileID: 0}
   carCrash: {fileID: 0}
+  fuelBipSound: {fileID: 0}
+  fuelBipClip: {fileID: 0}
+  doorSound: {fileID: 0}
+  doorCloseClip: {fileID: 0}
   spotLight: {fileID: 0}
   minVolume: 0.1
   maxVolume: 1
@@ -14081,6 +14086,7 @@ MonoBehaviour:
   cameraFollowOffset: {x: 0, y: 0}
   cameraFollowSmoothTime: 1
   sceneName: Scene 3
+  needHome: {fileID: 0}
 --- !u!61 &1851942888
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -14792,7 +14798,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -734526755
   m_SortingLayer: 1
-  m_SortingOrder: 5
+  m_SortingOrder: 6
   m_MaskInteraction: 0
   m_Sprite: {fileID: 3832651574402891477, guid: f0101d237a63e7046b8ac504ad2b2fb7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
