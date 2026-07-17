@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class Wipping : MonoBehaviour
 {
@@ -21,17 +22,11 @@ public class Wipping : MonoBehaviour
     public UnityEngine.UI.Text resultTitleText; // "Win" / "Lose"
     public UnityEngine.UI.Text resultSubtitleText; // detail message
 
-    [Header("Start Gate")]
-    public GameObject startOverlay; // shown until the player clicks the start button - car stays visible behind it
+    [Header("Intro Overlay")]
+    [FormerlySerializedAs("countdownOverlay")]
+    public GameObject introOverlay; // shown until the player starts wiping the car
     public GameObject gameOverlay; // timer + bar + instructions, shown once playing starts
     public GameObject handCursorObject;
-
-    bool startClicked;
-
-    [Header("Countdown")]
-    public GameObject countdownOverlay; // full-screen panel shown during 3, 2, 1, START
-    public UnityEngine.UI.Text countdownText;
-    public float countdownStepDuration = 1f;
 
     [Header("Round Settings")]
     public float roundDuration = 15f;
@@ -73,44 +68,24 @@ public class Wipping : MonoBehaviour
 
     IEnumerator RunGame()
     {
-        yield return StartCoroutine(WaitForStart());
-        yield return StartCoroutine(PlayCountdown());
+        yield return StartCoroutine(WaitForFirstWipe());
         yield return StartCoroutine(RunSingleRound());
     }
 
-    // Wired to the start button's OnClick.
-    public void OnStartButtonClicked()
+    // The intro overlay stays up until the player actually starts dragging
+    // over the car - that same input is the round's first wipe.
+    IEnumerator WaitForFirstWipe()
     {
-        startClicked = true;
-    }
-
-    IEnumerator WaitForStart()
-    {
-        startClicked = false;
-        if (startOverlay != null) startOverlay.SetActive(true);
+        if (introOverlay != null) introOverlay.SetActive(true);
         SetPlayingVisible(false);
 
-        while (!startClicked)
+        while (!(Input.GetMouseButton(0) && IsOverCar(GetCursorWorldPos())))
         {
             yield return null;
         }
 
-        if (startOverlay != null) startOverlay.SetActive(false);
+        if (introOverlay != null) introOverlay.SetActive(false);
         SetPlayingVisible(true);
-    }
-
-    IEnumerator PlayCountdown()
-    {
-        if (countdownOverlay != null) countdownOverlay.SetActive(true);
-
-        string[] steps = { "3", "2", "1", "START" };
-        foreach (string step in steps)
-        {
-            if (countdownText != null) countdownText.text = step;
-            yield return new WaitForSeconds(countdownStepDuration);
-        }
-
-        if (countdownOverlay != null) countdownOverlay.SetActive(false);
     }
 
     void SetPlayingVisible(bool visible)

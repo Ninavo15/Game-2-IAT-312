@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 // Click the "Click to Rip" button repeatedly (no holding) to rip the poster
 // down while the worker is turned left (safe). The character stays put - no
@@ -22,19 +23,15 @@ public class PosterRipMiniGame : MonoBehaviour
 
     [Header("UI (optional)")]
     public GameObject ripButton; // "Click to Rip" button, shown only while playing
-    public GameObject instructionPanel; // gameplay instructions (not the one in startOverlay), hidden until the round starts
+    public GameObject instructionPanel; // gameplay instructions, hidden until the round starts
     public UnityEngine.UI.Text timerText;
     public float timerWarningThreshold = 5f;
     public Color timerWarningColor = Color.red;
     public UnityEngine.UI.Image[] heartIcons;
 
-    [Header("Start Gate")]
-    public GameObject startOverlay; // shown until the player clicks the start button
-
-    [Header("Countdown")]
-    public GameObject countdownOverlay;
-    public UnityEngine.UI.Text countdownText;
-    public float countdownStepDuration = 1f;
+    [Header("Intro Overlay")]
+    [FormerlySerializedAs("countdownOverlay")]
+    public GameObject introOverlay; // shown until the player clicks Rip for the first time
 
     [Header("Result Overlay")]
     public GameObject resultOverlay;
@@ -61,7 +58,6 @@ public class PosterRipMiniGame : MonoBehaviour
     public string timeUpLine = "Shucks, the employer is noticing, I need to stop";
 
     bool gameStarted;
-    bool startClicked;
     float ripProgress;
     bool finished;
     float timeRemaining;
@@ -76,7 +72,6 @@ public class PosterRipMiniGame : MonoBehaviour
     {
         if (characterSprite != null) characterMovement = characterSprite.GetComponent<CharacterMovement>();
         if (exclamationMark != null) exclamationMark.Hide();
-        if (countdownOverlay != null) countdownOverlay.SetActive(false);
         if (resultOverlay != null) resultOverlay.SetActive(false);
         if (timerText != null) timerDefaultColor = timerText.color;
         timeRemaining = timeLimit;
@@ -86,45 +81,25 @@ public class PosterRipMiniGame : MonoBehaviour
         // The character never moves during this mini-game.
         if (characterMovement != null) characterMovement.enabled = false;
 
-        // Hidden until the countdown finishes - only the start overlay shows at first.
+        // Hidden until the player's first rip click starts the round.
         if (timerText != null) timerText.enabled = false;
         SetHeartIconsVisible(false);
-        if (ripButton != null) ripButton.SetActive(false);
         if (instructionPanel != null) instructionPanel.SetActive(false);
 
-        StartCoroutine(StartSequence());
+        // The rip button is clickable immediately - the first click both
+        // dismisses the intro overlay and starts the round.
+        if (ripButton != null) ripButton.SetActive(true);
+        if (introOverlay != null) introOverlay.SetActive(true);
     }
 
-    // Wired to the start button's OnClick.
-    public void OnStartButtonClicked()
+    void BeginRound()
     {
-        startClicked = true;
-    }
-
-    IEnumerator StartSequence()
-    {
-        startClicked = false;
-        if (startOverlay != null) startOverlay.SetActive(true);
-        while (!startClicked)
-        {
-            yield return null;
-        }
-        if (startOverlay != null) startOverlay.SetActive(false);
-
-        if (countdownOverlay != null) countdownOverlay.SetActive(true);
-        string[] steps = { "3", "2", "1", "START" };
-        foreach (string step in steps)
-        {
-            if (countdownText != null) countdownText.text = step;
-            yield return new WaitForSeconds(countdownStepDuration);
-        }
-        if (countdownOverlay != null) countdownOverlay.SetActive(false);
+        if (introOverlay != null) introOverlay.SetActive(false);
 
         if (timerText != null) timerText.enabled = true;
         UpdateTimerText();
         SetHeartIconsVisible(true);
         UpdateHeartsUI();
-        if (ripButton != null) ripButton.SetActive(true);
         if (instructionPanel != null) instructionPanel.SetActive(true);
         if (worker != null) worker.StartBehavior();
 
@@ -162,7 +137,13 @@ public class PosterRipMiniGame : MonoBehaviour
     // Wired to the rip button's OnClick - one click, one small tear.
     public void OnRipButtonClicked()
     {
-        if (!gameStarted || finished) return;
+        if (finished) return;
+
+        if (!gameStarted)
+        {
+            BeginRound();
+            return;
+        }
 
         bool checking = worker != null && worker.IsChecking;
         if (checking)

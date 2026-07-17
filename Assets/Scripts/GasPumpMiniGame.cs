@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 // Hold E to push the indicator up a vertical gauge; releasing lets gravity
 // pull it back down. Fuel only fills while the indicator is inside the green
@@ -14,9 +15,8 @@ using UnityEngine.SceneManagement;
 public class GasPumpMiniGame : MonoBehaviour
 {
     [Header("Overlays")]
-    public GameObject startOverlay;
-    public GameObject countdownOverlay;
-    public UnityEngine.UI.Text countdownText;
+    [FormerlySerializedAs("countdownOverlay")]
+    public GameObject introOverlay; // shown until the player starts pumping
     public GameObject resultOverlay;
     public UnityEngine.UI.Text resultTitleText;
     public UnityEngine.UI.Text resultSubtitleText;
@@ -50,9 +50,6 @@ public class GasPumpMiniGame : MonoBehaviour
     public Color holdPromptIdleColor = new Color(1, 1, 1, 0.55f);
     public Color holdPromptActiveColor = new Color(1, 0.85f, 0.2f, 1f);
 
-    [Header("Countdown")]
-    public float countdownStepDuration = 1f;
-
     [Header("Result")]
     public float resultHoldTime = 2.5f;
 
@@ -68,7 +65,6 @@ public class GasPumpMiniGame : MonoBehaviour
     public string carObjectName = "car bloody side";
     public Sprite carCleanSprite; // assign the "car side no blood" sprite in the Inspector
 
-    bool startClicked;
     bool gameActive;
     bool finished;
     float indicatorPos;
@@ -94,43 +90,28 @@ public class GasPumpMiniGame : MonoBehaviour
 
         fadeOverlay = CreateFadeOverlay();
 
-        ShowStartScreen();
+        ShowIntroScreen();
     }
 
-    void ShowStartScreen()
+    void ShowIntroScreen()
     {
         finished = false;
         gameActive = false;
         if (hud != null) hud.SetActive(false);
-        if (countdownOverlay != null) countdownOverlay.SetActive(false);
         if (resultOverlay != null) resultOverlay.SetActive(false);
-        if (startOverlay != null) startOverlay.SetActive(true);
-        StartCoroutine(StartSequence());
+        if (introOverlay != null) introOverlay.SetActive(true);
+        StartCoroutine(WaitForFirstPump());
     }
 
-    // Wired to the start button's OnClick.
-    public void OnStartButtonClicked()
+    // The intro overlay stays up until the player actually holds the pump
+    // key - that same key-hold is the round's first pump.
+    IEnumerator WaitForFirstPump()
     {
-        startClicked = true;
-    }
-
-    IEnumerator StartSequence()
-    {
-        startClicked = false;
-        while (!startClicked)
+        while (!Input.GetKey(pumpKey))
         {
             yield return null;
         }
-        if (startOverlay != null) startOverlay.SetActive(false);
-
-        if (countdownOverlay != null) countdownOverlay.SetActive(true);
-        string[] steps = { "3", "2", "1", "GO!" };
-        foreach (string step in steps)
-        {
-            if (countdownText != null) countdownText.text = step;
-            yield return new WaitForSeconds(countdownStepDuration);
-        }
-        if (countdownOverlay != null) countdownOverlay.SetActive(false);
+        if (introOverlay != null) introOverlay.SetActive(false);
 
         ResetRound();
         if (hud != null) hud.SetActive(true);
