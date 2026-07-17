@@ -432,6 +432,8 @@ MonoBehaviour:
   charactersPerSecond: 30
   introLine: 
   introDelay: 0.5
+  entranceAudio: {fileID: 0}
+  entranceClip: {fileID: 0}
 --- !u!114 &500000107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1019,7 +1021,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &500000141
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2523,10 +2525,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -2613,7 +2615,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 4.0502295, y: -132.15002}
+  m_AnchoredPosition: {x: 4.050171, y: -132.15002}
   m_SizeDelta: {x: 19.43954, y: -1.4999313}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1897457447
