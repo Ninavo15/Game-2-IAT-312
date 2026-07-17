@@ -267,6 +267,7 @@ public class PosterRipMiniGame : MonoBehaviour
     void TriggerWin()
     {
         finished = true;
+
         SetCharacterHandUp(false);
         if (ripButton != null) ripButton.SetActive(false);
         if (worker != null) worker.StopBehavior();
@@ -305,6 +306,7 @@ public class PosterRipMiniGame : MonoBehaviour
         if (worker != null) worker.StopBehavior();
         if (exclamationMark != null) exclamationMark.ShowDanger();
         StressSystem.AddPoint(1);
+
 
         StartCoroutine(ShowResultThenProceed("LOSE", "You being caught by the worker", () =>
         {

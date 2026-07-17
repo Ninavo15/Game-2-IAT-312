@@ -36,11 +36,13 @@ public class mirrorScript : MonoBehaviour
     public AudioClip bleachSplash;
     public AudioClip scissorRip;
     public AudioClip policeSiren;
+    public AudioClip scare;
 
     AudioSource audioSource;
     Animator animator;
     promptPop pp;
     public float cutsceneTime = 25f;
+    
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -122,8 +124,9 @@ public class mirrorScript : MonoBehaviour
             t--;
         }
         countdownText.text = "TOO LATE";
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(2f);
         countdownText.gameObject.SetActive(false);
+        SceneManager.LoadScene("Capture Ending");
 
     }
     IEnumerator startScare()
@@ -133,6 +136,7 @@ public class mirrorScript : MonoBehaviour
         if (StressSystem.stressPoints >= 2)
         {
             animator.SetBool("Stressed", true);
+            audioSource.PlayOneShot(scare);
             yield return new WaitForSeconds(2.5f);
             blink.SetActive(true);
             animator.SetBool("Stressed", false);
@@ -195,9 +199,9 @@ public class mirrorScript : MonoBehaviour
     {
         switch (item)
         {
-            case "bleach": return "BleachEnding";
-            case "scissor": return "ScissorEnding";
-            case "wrench": return "WrenchEnding";
+            case "bleach": return "dialoguePolice";
+            case "scissor": return "dialoguePolice";
+            case "wrench": return "running game";
             default: return "";
         }
     }
