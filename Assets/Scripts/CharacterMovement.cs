@@ -19,6 +19,10 @@ public class CharacterMovement : MonoBehaviour
     public bool motelEnter = false;
     private bool washroom = false;
 
+    [Header("Walking Sound")]
+    public AudioSource walkSound;
+    public AudioClip walkClip;
+
 
 
     public bool FacingRight { get; private set; } = true;
@@ -32,6 +36,11 @@ public class CharacterMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
 
+        if (walkSound != null)
+        {
+            walkSound.clip = walkClip;
+            walkSound.loop = true;
+        }
     }
 
     void Start()
@@ -64,6 +73,16 @@ public class CharacterMovement : MonoBehaviour
         Vector2 nextPos = rb.position + new Vector2(moveInput.x, 0f) * speed * Time.fixedDeltaTime;
         rb.MovePosition(nextPos);
         UpdateSprite(moveInput);
+        UpdateWalkSound(moveInput);
+    }
+
+    void UpdateWalkSound(Vector2 moveInput)
+    {
+        if (walkSound == null) return;
+
+        bool isMoving = moveInput.x != 0f;
+        if (isMoving && !walkSound.isPlaying) walkSound.Play();
+        else if (!isMoving && walkSound.isPlaying) walkSound.Stop();
     }
     private void Update()
     {

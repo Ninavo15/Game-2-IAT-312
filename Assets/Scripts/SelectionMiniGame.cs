@@ -17,6 +17,10 @@ public class SelectionMiniGame : MonoBehaviour
 
     public string nextSceneName = "Scene 4";
 
+    [Header("Choose Sound")]
+    public AudioSource chooseAudio;
+    public AudioClip chooseClip;
+
     bool choiceMade;
 
     void Start()
@@ -50,6 +54,7 @@ public class SelectionMiniGame : MonoBehaviour
         if (choiceMade) return;
         choiceMade = true;
         GlobalStore.bleachPick = true;
+        PlayChooseSound();
         StartCoroutine(FadeAndLoad());
     }
 
@@ -59,6 +64,7 @@ public class SelectionMiniGame : MonoBehaviour
         if (choiceMade) return;
         choiceMade = true;
         GlobalStore.scissorPick = true;
+        PlayChooseSound();
         StartCoroutine(FadeAndLoad());
     }
 
@@ -68,7 +74,13 @@ public class SelectionMiniGame : MonoBehaviour
         if (choiceMade) return;
         choiceMade = true;
         GlobalStore.wrenchPick = true;
+        PlayChooseSound();
         StartCoroutine(FadeAndLoad());
+    }
+
+    void PlayChooseSound()
+    {
+        if (chooseAudio != null && chooseClip != null) chooseAudio.PlayOneShot(chooseClip);
     }
 
     IEnumerator FadeAndLoad()
