@@ -1216,7 +1216,7 @@ MonoBehaviour:
   resultHoldTime: 2.5
   ripPerClick: 0.05
   successThreshold: 1
-  timeLimit: 15
+  timeLimit: 20
   maxHearts: 3
   tearAudio: {fileID: 800000054}
   tearClip: {fileID: 8300000, guid: a46cbf63b0e6a46ebb5cc78cc5a02113, type: 3}

@@ -1813,7 +1813,7 @@ MonoBehaviour:
   fuelFillRate: 30
   timerText: {fileID: 437778802}
   bestText: {fileID: 0}
-  timeLimit: 30
+  timeLimit: 20
   pumpKey: 122
   holdPromptText: {fileID: 0}
   holdPromptIdleColor: {r: 1, g: 1, b: 1, a: 0.55}
