@@ -19,7 +19,7 @@ public class CharacterMovement : MonoBehaviour
     public bool motelEnter = false;
     private bool washroom = false;
 
-    
+
 
     public bool FacingRight { get; private set; } = true;
 
@@ -31,6 +31,7 @@ public class CharacterMovement : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+
     }
 
     void OnEnable()
@@ -74,6 +75,7 @@ public class CharacterMovement : MonoBehaviour
             {
                 Debug.Log("mirror");
                 mirrorPic.SetActive(true);
+
                 washroomDialogue.SetActive(false);
             }
         }

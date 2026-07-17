@@ -168,7 +168,7 @@ public class HeartMiniGame : MonoBehaviour
 
     IEnumerator JumpSequence()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.8f);
         gPic.SetActive(false);
         yield return new WaitForSeconds(4);
         jumpscare.Play();
@@ -177,18 +177,18 @@ public class HeartMiniGame : MonoBehaviour
         ghost.SetActive(false);
         carPov.SetActive(false);
         car.SetActive(true);
-        pp.ShowPrompt2();
+        pp.ShowPrompt(pp.promptText2);
         carMove.stopped = false;    
     }
     IEnumerator SafeSequence()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1f);
         gPic.SetActive(false);
         yield return new WaitForSeconds(2);
         ghost.SetActive(false);
         carPov.SetActive(false);
         car.SetActive(true);
-        pp.ShowPrompt2();
+        pp.ShowPrompt(pp.promptText2);
         carMove.stopped = false;  
     }
     IEnumerator Beat()

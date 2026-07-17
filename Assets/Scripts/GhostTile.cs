@@ -34,7 +34,7 @@ public class GhostTile : MonoBehaviour
             car.stopped = true;
             StartCoroutine(GhostSequence());
 
-            pp.ShowPrompt1();
+            pp.ShowPrompt(pp.promptText1);
             StressSystem.AddPoint(1);
             Debug.Log("stress point: " + StressSystem.stressPoints);
         }

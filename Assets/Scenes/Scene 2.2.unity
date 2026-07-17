@@ -9940,7 +9940,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1063579226
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9974,9 +9974,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 281ee61691997094f96fb4080a4f6031, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  choicePanel: {fileID: 1063579225}
+  choicePanel: {fileID: 0}
   promptText1: {fileID: 421257624}
   promptText2: {fileID: 727624292}
+  promptText3: {fileID: 0}
+  promptText4: {fileID: 0}
+  promptText5: {fileID: 0}
+  promptText6: {fileID: 0}
   mapDisplayDuration: 2
 --- !u!82 &1063579228
 AudioSource:
@@ -14047,11 +14051,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   introActive: 0
   introDuration: 1
+  autoDriveToPosition: 0
+  autoDriveTarget: {x: 0, y: 0}
+  autoDriveStopDistance: 0.05
   speed: 4
   lateralSpeed: 2
   accel: 2
   horizontalForward: 0
   lockLateralMovement: 0
+  directLeftRight: 0
   stopAtX: 5.6
   lowFuelUI: {fileID: 0}
   player: {fileID: 0}
@@ -14070,6 +14078,8 @@ MonoBehaviour:
   fade: {fileID: 506330867}
   stopped: 0
   cameraTransform: {fileID: 2058171275}
+  cameraFollowOffset: {x: 0, y: 0}
+  cameraFollowSmoothTime: 1
   sceneName: Scene 3
 --- !u!61 &1851942888
 BoxCollider2D:

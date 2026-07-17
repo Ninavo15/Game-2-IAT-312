@@ -9,32 +9,22 @@ public class promptPop : MonoBehaviour
     public GameObject choicePanel;
     public GameObject promptText1;
     public GameObject promptText2;
+    public GameObject promptText3;
+    public GameObject promptText4;
+    public GameObject promptText5;
+    public GameObject promptText6;
 
     public float mapDisplayDuration = 2.0f;
-    public void ShowPrompt1()
+    public void ShowPrompt(GameObject prompt)
     {
-        choicePanel.SetActive(true);
-        promptText1.SetActive(true);
-        StartCoroutine(RevealPrompt1AfterDelay());
-
+        prompt.SetActive(true);
+        Debug.Log("prompt shown");
+        StartCoroutine(RevealPromptAfterDelay(prompt));
     }
-    public void ShowPrompt2()
-    {
-        promptText2.SetActive(true);
-        StartCoroutine(RevealPrompt2AfterDelay());
 
-    }
-    IEnumerator RevealPrompt1AfterDelay()
+    IEnumerator RevealPromptAfterDelay(GameObject prompt)
     {
         yield return new WaitForSeconds(mapDisplayDuration);
-        promptText1.SetActive(false);
-
-    }
-    IEnumerator RevealPrompt2AfterDelay()
-    {
-        yield return new WaitForSeconds(mapDisplayDuration);
-        promptText2.SetActive(false);
-
-
+        prompt.SetActive(false);
     }
 }

@@ -4,18 +4,37 @@ using System.Collections;
 using UnityEngine.UI;
 public class mirrorScript : MonoBehaviour
 {
+
+
+    [Header("UI")]
     public Text countdownText;
     public Image bleach;
     public Image scissor;
     public Image wrench;
     public float countdownFrom = 10f;
+    public GameObject blink;
+    public GameObject objOptions;
 
+    [Header("Audios")]
+    public AudioClip policeWalk;
+    public AudioClip glassShatter;
+    public AudioClip bleachSplash;
+    public AudioClip scissorRip;
+    public AudioClip policeSiren;
 
+    AudioSource audioSource;
+    Animator animator;
+    promptPop pp;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        animator = GetComponent<Animator>();
+        pp = GetComponent<promptPop>();
+        audioSource = GetComponent<AudioSource>();
+
+
         if (StressSystem.stressPoints == 1)
         {
             countdownFrom = 9f;
@@ -35,10 +54,6 @@ public class mirrorScript : MonoBehaviour
         else if (StressSystem.stressPoints == 4)
         {
             countdownFrom = 3f;
-        }
-        else if (StressSystem.stressPoints == 5)
-        {
-            countdownFrom = 2f;
         }
 
         if (GlobalStore.bleachPick)
@@ -70,6 +85,7 @@ public class mirrorScript : MonoBehaviour
             scissor.color = sc;
         }
         StartCoroutine(RunCountdown());
+        StartCoroutine(startScare());
     }
 
     // Update is called once per frame
@@ -90,7 +106,25 @@ public class mirrorScript : MonoBehaviour
         countdownText.text = "TOO LATE";
         yield return new WaitForSeconds(0.5f);
         countdownText.gameObject.SetActive(false);
-        // start gameplay here
+
+    }
+    IEnumerator startScare()
+    {
+        pp.ShowPrompt(pp.promptText1);
+        yield return new WaitForSeconds(3f);
+        if (StressSystem.stressPoints >= 0)
+        {
+            animator.SetBool("Stressed", true);
+            yield return new WaitForSeconds(2.5f);
+            blink.SetActive(true);
+            animator.SetBool("Stressed", false);
+            yield return new WaitForSeconds(1.4f);
+            pp.ShowPrompt(pp.promptText2);
+        }
+        audioSource.PlayOneShot(policeSiren);
+        pp.ShowPrompt(pp.promptText3);
+
+        
     }
 
 
