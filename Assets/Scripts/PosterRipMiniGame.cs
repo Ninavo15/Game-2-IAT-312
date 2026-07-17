@@ -47,6 +47,10 @@ public class PosterRipMiniGame : MonoBehaviour
     public float timeLimit = 20f; // seconds, once ripping starts - placeholder for now
     public int maxHearts = 3;
 
+    [Header("Tear Sound")]
+    public AudioSource tearAudio;
+    public AudioClip tearClip;
+
     [Header("Dialogue + Transition")]
     public SceneTransitionAfterDialogue winTransition;
     public string winLine = "Got it! Time to get out of here.";
@@ -171,6 +175,7 @@ public class PosterRipMiniGame : MonoBehaviour
         }
 
         FlashHandUp();
+        if (tearAudio != null && tearClip != null) tearAudio.PlayOneShot(tearClip);
 
         ripProgress = Mathf.Clamp01(ripProgress + ripPerClick);
         if (poster != null) poster.SetProgress(ripProgress);

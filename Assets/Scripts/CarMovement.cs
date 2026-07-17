@@ -42,6 +42,10 @@ public class CarMovement : MonoBehaviour
     public AudioSource fuelBipSound;
     public AudioClip fuelBipClip;
 
+    [Header("Door Sound")]
+    public AudioSource doorSound;
+    public AudioClip doorCloseClip; // played when the player exits the car
+
     public Light2D spotLight;
 
 
@@ -335,6 +339,7 @@ public class CarMovement : MonoBehaviour
         engineSound.Stop();
         beerSound.Stop();
         if (fuelBipSound != null) fuelBipSound.Stop();
+        if (doorSound != null && doorCloseClip != null) doorSound.PlayOneShot(doorCloseClip);
         GetComponent<PlayerInput>().enabled = false;
         enabled = false;
 

@@ -13,6 +13,10 @@ public class CarEntryInteraction : MonoBehaviour
     public Fading fade;
     public CarMovement carMovement;
 
+    [Header("Door Sound")]
+    public AudioSource doorSound;
+    public AudioClip doorCloseClip; // played when entry succeeds and the drive-away starts
+
     [Header("Missing requirement lines")]
     public string needBothLine = "I need to pump some gas and buy some stuffs";
     public string needGasLine = "I need some gas";
@@ -63,6 +67,7 @@ public class CarEntryInteraction : MonoBehaviour
     {
         if (player != null) player.SetActive(false);
         if (carMovement != null) carMovement.enabled = false;
+        if (doorSound != null && doorCloseClip != null) doorSound.PlayOneShot(doorCloseClip);
 
         // Start fading to black as soon as the car starts moving, not after
         // it stops - the drive and the fade run at the same time.

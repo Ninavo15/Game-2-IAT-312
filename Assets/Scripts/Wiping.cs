@@ -41,10 +41,14 @@ public class Wipping : MonoBehaviour
     public Color timerWarningColor = Color.red;
 
     [Header("Wipe Speed")]
-    // Holding the mouse 
+    // Holding the mouse
     public float baseWipeRate = 0.35f;
     // Extra wipe rate per second added on top, scaled by how fast the mouse dragging.
     public float wipeRatePerSpeedUnit = 0.15f;
+
+    [Header("Wipe Sound")]
+    public AudioSource wipeAudio;
+    public AudioClip wipeClip;
 
     Vector3 lastCursorWorldPos;
     float progressBarFullWidth;
@@ -56,6 +60,12 @@ public class Wipping : MonoBehaviour
         if (resultOverlay != null) resultOverlay.SetActive(false);
         if (progressBarFill != null) progressBarFullWidth = progressBarFill.rectTransform.sizeDelta.x;
         if (timerText != null) timerDefaultColor = timerText.color;
+
+        if (wipeAudio != null)
+        {
+            wipeAudio.clip = wipeClip;
+            wipeAudio.loop = true;
+        }
 
         SetPlayingVisible(false);
         StartCoroutine(RunGame());
@@ -120,10 +130,16 @@ public class Wipping : MonoBehaviour
         {
             Vector3 worldPos = GetCursorWorldPos();
 
-            if (Input.GetMouseButton(0) && IsOverCar(worldPos))
+            bool wiping = Input.GetMouseButton(0) && IsOverCar(worldPos);
+            if (wiping)
             {
                 float speed = Vector3.Distance(worldPos, lastCursorWorldPos) / Mathf.Max(Time.deltaTime, 0.0001f);
                 stain.WipeAtWorldPoint(worldPos, (baseWipeRate + speed * wipeRatePerSpeedUnit) * Time.deltaTime);
+            }
+            if (wipeAudio != null)
+            {
+                if (wiping && !wipeAudio.isPlaying) wipeAudio.Play();
+                else if (!wiping && wipeAudio.isPlaying) wipeAudio.Stop();
             }
             lastCursorWorldPos = worldPos;
 
@@ -151,6 +167,7 @@ public class Wipping : MonoBehaviour
             yield return null;
         }
 
+        if (wipeAudio != null) wipeAudio.Stop();
         ShowResult(success);
 
         yield return new WaitForSeconds(resultHoldTime);

@@ -13,6 +13,10 @@ public class Interactable : MonoBehaviour
     [Tooltip("If false, interacting doesn't permanently disable this component - use this when onInteract can be a no-op/blocked outcome (e.g. a condition check that shows a line but doesn't let the player through), so they can keep trying.")]
     public bool oneShot = true;
 
+    [Tooltip("Optional - played every time this interaction fires. Leave unset for interactions that have their own conditional sound logic elsewhere (e.g. entering the car).")]
+    public AudioSource interactSound;
+    public AudioClip interactClip;
+
     bool playerInRange = false;
 
     void Awake()
@@ -64,6 +68,7 @@ public class Interactable : MonoBehaviour
                 if (promptText != null) promptText.SetActive(false);
                 enabled = false; // one-shot: don't let the prompt flicker back on afterward
             }
+            if (interactSound != null && interactClip != null) interactSound.PlayOneShot(interactClip);
             onInteract.Invoke();
         }
     }
