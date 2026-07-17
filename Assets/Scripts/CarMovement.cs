@@ -93,7 +93,11 @@ public class CarMovement : MonoBehaviour
 
             // Stay parked where it stopped before the mini-game, not back at its intro spawn point -
             // autoDriveTarget doubles as "the car's resting spot" whether it got there via
-            // AutoDriveSequence or the intro-drive sequence.
+            // AutoDriveSequence or the intro-drive sequence. This scene reloads fresh on every
+            // mini-game round trip though, which resets autoDriveTarget back to its serialized
+            // (hand-tuned, slightly mismatched) value - CarParkState carries the position the
+            // intro drive actually stopped at across those reloads instead.
+            if (CarParkState.Established) autoDriveTarget = CarParkState.Position;
             rb.position = autoDriveTarget;
 
             // Put the camera back where it ended up following the car, not
@@ -157,6 +161,12 @@ public class CarMovement : MonoBehaviour
         {
             lowFuelUI.SetActive(true);
         }
+
+        // Save the car's final position after the intro drive so it can be restored if the player returns from the mini-game.
+        autoDriveTarget = rb.position;
+        CarParkState.Established = true;
+        CarParkState.Position = rb.position;
+
         introActive = false;
 
     }
@@ -239,9 +249,7 @@ public class CarMovement : MonoBehaviour
         {
             Debug.Log("Cam Road triggered");
             cameraTransform.SetParent(transform, true);
-            // Ease into the configured follow offset instead of snapping to
-            // it instantly - smooths out the cut from static camera to
-            // riding along with the car.
+            // Fixed local offset applied once the camera parents to the car at a
             if (cameraFollowRoutine != null) StopCoroutine(cameraFollowRoutine);
             cameraFollowRoutine = StartCoroutine(SmoothCameraToFollowOffset());
             Debug.Log("Camera parent is now: " + cameraTransform.parent.name);
