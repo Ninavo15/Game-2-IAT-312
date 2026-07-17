@@ -63,8 +63,7 @@ public class HomeIntroSequence : MonoBehaviour
     public float tvFlickerOffTime = 0.2f;
 
     [Header("Room ghost - approach after TV")]
-    // Each index is one appearance: ghost snaps straight to that position/scale, no
-    // easing in between - edit these directly in the Inspector to reposition any step.
+    // The ghost pops into view
     public string approachLine = "No! No! Stay Away!!!";
     public Vector2[] approachPositions = new Vector2[]
     {
