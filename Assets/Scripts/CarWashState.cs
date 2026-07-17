@@ -5,6 +5,7 @@ public static class CarWashState
     public static bool Cleaned;
 
     // True once the wipe mini-game has been played at all (win or lose) -
-    // used to stop offering the car's interact prompt again afterward.
+    // used by CarInteractionGate to swap the car's interact prompt from
+    // "check the car" to "enter the car" instead of offering it again.
     public static bool Played;
 }

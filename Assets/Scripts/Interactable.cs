@@ -10,6 +10,9 @@ public class Interactable : MonoBehaviour
     [Tooltip("Show the prompt immediately if the player is returning from a mini-game (e.g. the convenience store's item-selection scene) - a teleport straight back into this trigger doesn't reliably fire a trigger event on the same frame.")]
     public bool showPromptIfReturnedFromSelection = false;
 
+    [Tooltip("If false, interacting doesn't permanently disable this component - use this when onInteract can be a no-op/blocked outcome (e.g. a condition check that shows a line but doesn't let the player through), so they can keep trying.")]
+    public bool oneShot = true;
+
     bool playerInRange = false;
 
     void Awake()
@@ -56,8 +59,11 @@ public class Interactable : MonoBehaviour
 
         if (showPrompt && Keyboard.current != null && Keyboard.current.eKey.wasPressedThisFrame)
         {
-            if (promptText != null) promptText.SetActive(false);
-            enabled = false; // one-shot: don't let the prompt flicker back on afterward
+            if (oneShot)
+            {
+                if (promptText != null) promptText.SetActive(false);
+                enabled = false; // one-shot: don't let the prompt flicker back on afterward
+            }
             onInteract.Invoke();
         }
     }
