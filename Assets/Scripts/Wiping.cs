@@ -35,7 +35,7 @@ public class Wipping : MonoBehaviour
 
     [Header("Round Settings")]
     public float roundDuration = 15f;
-    [Range(0.01f, 1f)] public float successThreshold = 0.8f;
+    [Range(0.01f, 1f)] public float successThreshold = 0.75f;
     public float resultHoldTime = 2.5f;
     public float timerWarningThreshold = 5f;
     public Color timerWarningColor = Color.red;

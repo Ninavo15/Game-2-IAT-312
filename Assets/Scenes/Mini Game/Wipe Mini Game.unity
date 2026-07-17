@@ -588,7 +588,7 @@ MonoBehaviour:
   countdownText: {fileID: 900000263}
   countdownStepDuration: 1
   roundDuration: 10
-  successThreshold: 0.85
+  successThreshold: 0.75
   resultHoldTime: 2.5
   timerWarningThreshold: 5
   timerWarningColor: {r: 1, g: 0, b: 0, a: 1}
