@@ -2282,6 +2282,7 @@ MonoBehaviour:
   bleachSplash: {fileID: 8300000, guid: 855a057b73c5bf64cadee340842234a6, type: 3}
   scissorRip: {fileID: 8300000, guid: 09e09f870012b29419ee3f41573922fd, type: 3}
   policeSiren: {fileID: 8300000, guid: 9607f69be1da80c4cb0a379df52b7948, type: 3}
+  scare: {fileID: 8300000, guid: 1de1f0caee77a6d4e90dc09a65c9fca8, type: 3}
   cutsceneTime: 3
 --- !u!95 &1489943141
 Animator:

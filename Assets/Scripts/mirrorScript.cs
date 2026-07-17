@@ -36,11 +36,13 @@ public class mirrorScript : MonoBehaviour
     public AudioClip bleachSplash;
     public AudioClip scissorRip;
     public AudioClip policeSiren;
+    public AudioClip scare;
 
     AudioSource audioSource;
     Animator animator;
     promptPop pp;
     public float cutsceneTime = 25f;
+    
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -134,6 +136,7 @@ public class mirrorScript : MonoBehaviour
         if (StressSystem.stressPoints >= 2)
         {
             animator.SetBool("Stressed", true);
+            audioSource.PlayOneShot(scare);
             yield return new WaitForSeconds(2.5f);
             blink.SetActive(true);
             animator.SetBool("Stressed", false);

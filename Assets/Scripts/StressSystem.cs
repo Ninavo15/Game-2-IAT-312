@@ -6,6 +6,7 @@ public static class StressSystem
 
     public static void AddPoint(int amount = 1)
     {
+        Debug.Log(stressPoints);
         stressPoints += amount;
     }
 
