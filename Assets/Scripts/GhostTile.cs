@@ -20,10 +20,11 @@ public class GhostTile : MonoBehaviour
     [SerializeField] GameObject pov;
     [SerializeField] GameObject heart;
     [SerializeField] GameObject keys;
+    [SerializeField] GameObject slot;
 
 
     public float ghostDuration = 2.0f;
-
+   
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -44,6 +45,7 @@ public class GhostTile : MonoBehaviour
     IEnumerator GhostSequence()
     {
         yield return new WaitForSeconds(ghostDuration);
+        slot.SetActive(true);
         ghost.SetActive(false);
         carr.SetActive(false);
         pov.SetActive(true);

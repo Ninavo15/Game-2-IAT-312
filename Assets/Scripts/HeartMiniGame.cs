@@ -26,6 +26,8 @@ public class HeartMiniGame : MonoBehaviour
     GameObject car;
     [SerializeField]
     GameObject lastE;
+    [SerializeField]
+    GameObject slot;
 
 
 
@@ -169,6 +171,8 @@ public class HeartMiniGame : MonoBehaviour
     IEnumerator JumpSequence()
     {
         yield return new WaitForSeconds(0.8f);
+        slot.SetActive(false);
+
         gPic.SetActive(false);
         yield return new WaitForSeconds(4);
         jumpscare.Play();
@@ -182,6 +186,7 @@ public class HeartMiniGame : MonoBehaviour
     }
     IEnumerator SafeSequence()
     {
+        slot.SetActive(false);
         yield return new WaitForSeconds(1f);
         gPic.SetActive(false);
         yield return new WaitForSeconds(2);
