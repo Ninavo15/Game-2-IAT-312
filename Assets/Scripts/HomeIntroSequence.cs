@@ -12,7 +12,7 @@ public class HomeIntroSequence : MonoBehaviour
 
     [Header("Dialogue")]
     public DialogueController dialogue;
-    public string introLine = "I'm so tired. I need to find way to get rid all the evidence";
+    public string introLine = "I'm so tired. I need to find way to get rid all the evidences";
     public float introHoldDuration = 3f;
     public float introDelay = 0.5f;
 
@@ -21,7 +21,7 @@ public class HomeIntroSequence : MonoBehaviour
 
     [Header("Light flicker")]
     public string lightFlickerLine = "Huh!? What's happening???";
-    public int lightFlickerCount = 6;
+    public int lightFlickerCount = 3;
     public float lightFlickerStartInterval = 0.4f; // slow at first
     public float lightFlickerSpeedMultiplier = 0.6f; // interval shrinks by this each flicker - faster and faster
 
@@ -34,24 +34,33 @@ public class HomeIntroSequence : MonoBehaviour
     [Header("TV ghost")]
     public GameObject tvGhost;
     public string tvGhostLine1 = "THAT'S GIRL!!! THE ONE I HIT";
-    public string tvGhostLine2 = "Why she's here?";
     public int tvFlickerCount = 3;
     public float tvFlickerOnTime = 0.25f;
     public float tvFlickerOffTime = 0.2f;
 
     [Header("Room ghost - approach after TV")]
+    // Each index is one appearance: ghost snaps straight to that position/scale, no
+    // easing in between - edit these directly in the Inspector to reposition any step.
     public string approachLine = "No! No! Stay Away!!!";
-    public int roomGhostApproachSteps = 3;
-    public Vector2 roomGhostApproachEndPosition = new Vector2(-1.5f, -1.2f);
-    public float roomGhostApproachEndScale = 9f;
+    public Vector2[] approachPositions = new Vector2[]
+    {
+        new Vector2(-6.02f, -1.83f),
+        new Vector2(-4.38f, -2.49f),
+        new Vector2(-0.16f, -3.97f),
+    };
+    public float[] approachScales = new float[] { 4.627964f, 6.5f, 9f };
     public float roomGhostOnTime = 0.3f;
     public float roomGhostOffTime = 0.2f;
 
+    [Header("Relief beat")]
+    public string reliefLine = "Is it end?";
+    public float reliefHoldTime = 6f; // light on, no ghost in sight, before the jumpscare
+
     [Header("Final jumpscare")]
-    public float reliefHoldTime = 1f; // light on, no ghost in sight, before the jumpscare
-    public Vector2 jumpscarePosition = new Vector2(-0.5f, -1f);
-    public float jumpscareScale = 13f;
-    public float jumpscareHoldTime = 1.5f;
+    public string jumpscareLine = "AAAAAAAA";
+    public Vector2 jumpscarePosition = new Vector2(0.31f, -4.77f);
+    public float jumpscareScale = 13.84275f;
+    public float jumpscareHoldTime = 3f;
 
     [Header("Ending transition")]
     public string endingScene = "House Ending";
@@ -102,37 +111,35 @@ public class HomeIntroSequence : MonoBehaviour
         }
         if (roomGhost != null) roomGhost.SetActive(false);
 
-        // TV turns on with the ghost on screen, flickering a few times.
+        // TV turns on with the ghost on screen - the room light flickers in
+        // sync with it (dark whenever the TV is off) for a few cycles.
         if (tvGhost != null)
         {
-            tvGhost.SetActive(true);
-            dialogue.ShowLine(tvGhostLine1, 2f);
-            yield return new WaitForSeconds(tvFlickerOnTime);
+            dialogue.ShowLine(tvGhostLine1, 3f);
             for (int i = 0; i < tvFlickerCount; i++)
             {
-                tvGhost.SetActive(false);
-                yield return new WaitForSeconds(tvFlickerOffTime);
                 tvGhost.SetActive(true);
+                blackOverlayGroup.alpha = 0f;
                 yield return new WaitForSeconds(tvFlickerOnTime);
+
+                tvGhost.SetActive(false);
+                blackOverlayGroup.alpha = 1f;
+                yield return new WaitForSeconds(tvFlickerOffTime);
             }
-            dialogue.ShowLine(tvGhostLine2, 2f);
-            yield return new WaitForSeconds(1f);
             tvGhost.SetActive(false);
+            blackOverlayGroup.alpha = 0f;
         }
 
-        // The ghost steps out of the TV and into the room, stepping closer
-        // and growing bigger with each appearance (each one an instant pop,
-        // not a gradual fade/grow-in).
+        // The ghost steps out of the TV and into the room through a fixed
+        // set of waypoints - each one an instant pop, not a gradual grow-in.
         if (roomGhost != null)
         {
-            for (int i = 0; i < roomGhostApproachSteps; i++)
+            for (int i = 0; i < approachPositions.Length; i++)
             {
-                float t = (i + 1f) / roomGhostApproachSteps;
-                Vector2 pos = Vector2.Lerp(roomGhostGlimpsePosition, roomGhostApproachEndPosition, t);
-                float scale = Mathf.Lerp(roomGhostGlimpseScale, roomGhostApproachEndScale, t);
-
-                roomGhost.transform.position = pos;
+                roomGhost.transform.position = approachPositions[i];
+                float scale = i < approachScales.Length ? approachScales[i] : approachScales[approachScales.Length - 1];
                 roomGhost.transform.localScale = new Vector3(scale, scale, scale);
+
                 roomGhost.SetActive(true);
                 yield return new WaitForSeconds(roomGhostOnTime);
 
@@ -146,6 +153,8 @@ public class HomeIntroSequence : MonoBehaviour
 
         // A moment of relief - the light's on, the girl's nowhere to be seen...
         if (roomGhost != null) roomGhost.SetActive(false);
+        float reliefRevealTime = reliefLine.Length / Mathf.Max(dialogue.charactersPerSecond, 1f);
+        dialogue.ShowLine(reliefLine, Mathf.Max(0f, reliefHoldTime - reliefRevealTime));
         yield return new WaitForSeconds(reliefHoldTime);
 
         // ...before she suddenly appears right in front of the player.
@@ -155,6 +164,8 @@ public class HomeIntroSequence : MonoBehaviour
             roomGhost.transform.localScale = new Vector3(jumpscareScale, jumpscareScale, jumpscareScale);
             roomGhost.SetActive(true);
         }
+        float jumpscareRevealTime = jumpscareLine.Length / Mathf.Max(dialogue.charactersPerSecond, 1f);
+        dialogue.ShowLine(jumpscareLine, Mathf.Max(0f, jumpscareHoldTime - jumpscareRevealTime));
         yield return new WaitForSeconds(jumpscareHoldTime);
 
         // Cut to the ending.

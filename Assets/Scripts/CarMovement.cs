@@ -38,6 +38,10 @@ public class CarMovement : MonoBehaviour
     public AudioClip crashClip;
     public AudioSource carCrash;
 
+    [Header("Fuel Bip Sound")]
+    public AudioSource fuelBipSound;
+    public AudioClip fuelBipClip;
+
     public Light2D spotLight;
 
 
@@ -80,6 +84,12 @@ public class CarMovement : MonoBehaviour
         beerSound.volume = minVolume;
         engineSound.Play();
         beerSound.Play();
+
+        if (fuelBipSound != null)
+        {
+            fuelBipSound.clip = fuelBipClip;
+            fuelBipSound.loop = true;
+        }
     }
     private void Start()
     {
@@ -160,6 +170,7 @@ public class CarMovement : MonoBehaviour
         else if (lowFuelUI != null)
         {
             lowFuelUI.SetActive(true);
+            PlayLowFuelBip();
         }
 
         // Save the car's final position after the intro drive so it can be restored if the player returns from the mini-game.
@@ -180,6 +191,7 @@ public class CarMovement : MonoBehaviour
 
         rb.MovePosition(autoDriveTarget);
         if (lowFuelUI != null) lowFuelUI.SetActive(true);
+        PlayLowFuelBip();
         // stays stopped - the car never responds to player input in this scene, only E to exit
     }
 
@@ -191,6 +203,7 @@ public class CarMovement : MonoBehaviour
         {
             stopped = true;
             if (lowFuelUI != null) lowFuelUI.SetActive(true);
+            PlayLowFuelBip();
         }
 
         Vector2 targetInput = stopped ? Vector2.zero : rawInput;
@@ -227,6 +240,14 @@ public class CarMovement : MonoBehaviour
         UpdateEngineSound();
 
     }
+    void PlayLowFuelBip()
+    {
+        if (fuelBipSound != null && fuelBipClip != null && !fuelBipSound.isPlaying)
+        {
+            fuelBipSound.Play();
+        }
+    }
+
     void UpdateEngineSound()
     {
         float throttle = directLeftRight ? Mathf.Abs(smoothedInput.x) : Mathf.Clamp01(smoothedInput.y);
@@ -313,6 +334,7 @@ public class CarMovement : MonoBehaviour
 
         engineSound.Stop();
         beerSound.Stop();
+        if (fuelBipSound != null) fuelBipSound.Stop();
         GetComponent<PlayerInput>().enabled = false;
         enabled = false;
 
