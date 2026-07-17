@@ -1195,7 +1195,7 @@ MonoBehaviour:
   exclamationMark: {fileID: 800000070}
   characterSprite: {fileID: 1740639874}
   characterNormalSprite: {fileID: 3230195703155003278, guid: d3a458893efb74cf6b09abbee3120470, type: 3}
-  characterHandUpSprite: {fileID: 4976896556373272417, guid: 4ad4b067370394ceaa8a2bc96596092d, type: 3}
+  characterHandUpSprite: {fileID: 21300000, guid: 4ad4b067370394ceaa8a2bc96596092d, type: 3}
   handUpFlashDuration: 0.15
   ripButton: {fileID: 950000150}
   timerText: {fileID: 800000163}
