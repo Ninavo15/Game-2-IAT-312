@@ -54,7 +54,7 @@ public class mirrorScript : MonoBehaviour
 
         bleachButton.onClick.AddListener(() => OnItemClicked("bleach"));
         scissorButton.onClick.AddListener(() => OnItemClicked("scissor"));
-        wrenchButton.onClick.AddListener(() => OnItemClicked("wrench"));
+        wrenchButton.onClick.AddListener(() => OnItemClicked("wrench"));    
 
 
         if (StressSystem.stressPoints <= 1)
