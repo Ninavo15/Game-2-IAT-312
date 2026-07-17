@@ -73,8 +73,6 @@ public class CharacterMovement : MonoBehaviour
             {
                 SceneManager.LoadScene("Scene 5");
                 Debug.Log("scene 5");
-
-
             }
         }
         if (washroom)
