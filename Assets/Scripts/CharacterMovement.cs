@@ -79,9 +79,6 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
-
-    
-
     void UpdateSprite(Vector2 moveInput)
     {
         if (moveInput.x == 0f) return;
