@@ -402,6 +402,7 @@ MonoBehaviour:
   carSpeedClip: {fileID: 8300000, guid: 9ecf8f7e2786445dfa884aae7a3951df, type: 3}
   carSpeedDuration: 5
   carCrashClip: {fileID: 8300000, guid: f2ddb7acb9bdd55488f2deb558d39766, type: 3}
+  crashOverlap: 1
   carDoorOpenClip: {fileID: 8300000, guid: 7d9107b4f520b4077a614be19f8ed705, type: 3}
   walkingClip: {fileID: 8300000, guid: 6334c5e1a340327438c0215180f629e5, type: 3}
   trunkCloseClip: {fileID: 8300000, guid: 6373272dd7646430da7797c140c58578, type: 3}

@@ -105,3 +105,4 @@ public class MainMenuController : MonoBehaviour
         group.alpha = target;
     }
 }
+

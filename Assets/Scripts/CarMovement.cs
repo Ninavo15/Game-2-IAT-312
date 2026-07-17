@@ -27,6 +27,7 @@ public class CarMovement : MonoBehaviour
     [Header("Stop & Exit")]
     public float stopAtX = 5.6f;
     public GameObject lowFuelUI;
+    public GameObject arriveOverlay; // shown while stopped, hidden again once the player exits the car
     public GameObject player;
     public Vector2 exitOffset = new Vector2(-6.5858803f, -2.5f);
 
@@ -177,10 +178,14 @@ public class CarMovement : MonoBehaviour
         {
             stopped = false;
         }
-        else if (lowFuelUI != null)
+        else
         {
-            lowFuelUI.SetActive(true);
-            PlayLowFuelBip();
+            if (lowFuelUI != null)
+            {
+                lowFuelUI.SetActive(true);
+                PlayLowFuelBip();
+            }
+            if (arriveOverlay != null) arriveOverlay.SetActive(true);
         }
 
         // Save the car's final position after the intro drive so it can be restored if the player returns from the mini-game.
@@ -201,6 +206,7 @@ public class CarMovement : MonoBehaviour
 
         rb.MovePosition(autoDriveTarget);
         if (lowFuelUI != null) lowFuelUI.SetActive(true);
+        if (arriveOverlay != null) arriveOverlay.SetActive(true);
         PlayLowFuelBip();
         // stays stopped - the car never responds to player input in this scene, only E to exit
     }
@@ -213,6 +219,7 @@ public class CarMovement : MonoBehaviour
         {
             stopped = true;
             if (lowFuelUI != null) lowFuelUI.SetActive(true);
+            if (arriveOverlay != null) arriveOverlay.SetActive(true);
             PlayLowFuelBip();
         }
 
@@ -353,6 +360,7 @@ public class CarMovement : MonoBehaviour
         player.SetActive(true);
 
         if (lowFuelUI != null) lowFuelUI.SetActive(false);
+        if (arriveOverlay != null) arriveOverlay.SetActive(false);
     }
     IEnumerator NeedHome()
     {

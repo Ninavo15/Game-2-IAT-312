@@ -13,6 +13,7 @@ public class ProlougeAudioSequence : MonoBehaviour
     public AudioClip carSpeedClip;
     public float carSpeedDuration = 5f; // cut short here even if the clip runs longer
     public AudioClip carCrashClip;
+    public float crashOverlap = 1f; // crash kicks in this many seconds before the speed clip ends
     public AudioClip carDoorOpenClip;
     public AudioClip walkingClip;
     public AudioClip trunkCloseClip;
@@ -27,8 +28,13 @@ public class ProlougeAudioSequence : MonoBehaviour
 
     IEnumerator Sequence()
     {
-        yield return PlayAndWait(carSpeedClip, carSpeedDuration);
-        yield return PlayAndWait(carCrashClip);
+        if (carSpeedClip != null) audioSource.PlayOneShot(carSpeedClip);
+        yield return new WaitForSeconds(Mathf.Max(0f, carSpeedDuration - crashOverlap));
+
+        if (carCrashClip != null) audioSource.PlayOneShot(carCrashClip);
+        float crashClipLength = carCrashClip != null ? carCrashClip.length : 0f;
+        yield return new WaitForSeconds(Mathf.Max(crashOverlap, crashClipLength));
+
         yield return PlayAndWait(carDoorOpenClip);
         yield return PlayAndWait(walkingClip);
         yield return PlayAndWait(trunkCloseClip);

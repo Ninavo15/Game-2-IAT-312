@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-// Horror scene that plays when the player turn on the lighr
+// Horror scene that plays when the player turn on the light
 public class HomeIntroSequence : MonoBehaviour
 {
     [Header("Black overlay")]

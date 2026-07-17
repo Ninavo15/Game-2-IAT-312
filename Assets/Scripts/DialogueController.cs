@@ -16,6 +16,11 @@ public class DialogueController : MonoBehaviour
     public string introLine;
     public float introDelay = 0.5f;
 
+    [Header("Entrance sound (optional)")]
+    [Tooltip("Played immediately when the scene starts, before introLine appears. Skipped along with introLine on a return trip (see skipIntro).")]
+    public AudioSource entranceAudio;
+    public AudioClip entranceClip;
+
     Coroutine current;
     bool skipIntro;
 
@@ -32,7 +37,11 @@ public class DialogueController : MonoBehaviour
 
     void Start()
     {
-        if (!skipIntro && !string.IsNullOrEmpty(introLine)) StartCoroutine(ShowIntroAfterDelay());
+        if (skipIntro) return;
+
+        if (entranceAudio != null && entranceClip != null) entranceAudio.PlayOneShot(entranceClip);
+
+        if (!string.IsNullOrEmpty(introLine)) StartCoroutine(ShowIntroAfterDelay());
     }
 
     IEnumerator ShowIntroAfterDelay()
