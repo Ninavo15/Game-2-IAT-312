@@ -73,6 +73,7 @@ public class CarMovement : MonoBehaviour
     Coroutine cameraFollowRoutine;
     public string sceneName;
     private bool crashed = false;
+    public GameObject needHome;
 
     void Awake()
     {
@@ -97,6 +98,11 @@ public class CarMovement : MonoBehaviour
     }
     private void Start()
     {
+        if (needHome != null)
+        {
+            StartCoroutine(NeedHome());
+        }
+
         if (PosterState.ReturnedFromMiniGame)
         {
             PosterState.ReturnedFromMiniGame = false; // consume - don't affect a later fresh visit
@@ -348,5 +354,9 @@ public class CarMovement : MonoBehaviour
 
         if (lowFuelUI != null) lowFuelUI.SetActive(false);
     }
-
+    IEnumerator NeedHome()
+    {
+        yield return new WaitForSeconds(3f);
+        needHome.SetActive(false);
+    }
 }
