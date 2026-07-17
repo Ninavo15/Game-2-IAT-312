@@ -22,6 +22,7 @@ public class PosterRipMiniGame : MonoBehaviour
 
     [Header("UI (optional)")]
     public GameObject ripButton; // "Click to Rip" button, shown only while playing
+    public GameObject instructionPanel; // gameplay instructions (not the one in startOverlay), hidden until the round starts
     public UnityEngine.UI.Text timerText;
     public float timerWarningThreshold = 5f;
     public Color timerWarningColor = Color.red;
@@ -89,6 +90,7 @@ public class PosterRipMiniGame : MonoBehaviour
         if (timerText != null) timerText.enabled = false;
         SetHeartIconsVisible(false);
         if (ripButton != null) ripButton.SetActive(false);
+        if (instructionPanel != null) instructionPanel.SetActive(false);
 
         StartCoroutine(StartSequence());
     }
@@ -123,6 +125,7 @@ public class PosterRipMiniGame : MonoBehaviour
         SetHeartIconsVisible(true);
         UpdateHeartsUI();
         if (ripButton != null) ripButton.SetActive(true);
+        if (instructionPanel != null) instructionPanel.SetActive(true);
         if (worker != null) worker.StartBehavior();
 
         gameStarted = true;

@@ -260,15 +260,12 @@ MonoBehaviour:
   dialoguePanel: {fileID: 1733948294}
   dialogueText: {fileID: 829463773}
   endingLines:
-  - Breaking news tonight.
-  - Police have arrested a driver connected to the disappearance of a young woman
-    named Ann.
-  - Investigators believe the suspect struck Ann in a hit-and-run,
-  - then concealed her body inside the trunk of the vehicle before attempting to
-    escape.
-  - After a brief police chase, the driver was captured and taken into custody.
-  - "Authorities say Ann\u2019s family has been notified, and the investigation remains
-    ongoing."
+  - Police arrested a local man last night
+  - after a convenience store worker caught him tearing down a missing-person poster.
+  - The worker became suspicious and called the police,
+  - who arrived shortly afterward and took the man into custody.
+  - Investigators are now examining whether he is connected to the missing-person
+    case.
 --- !u!82 &407613748
 AudioSource:
   m_ObjectHideFlags: 0
