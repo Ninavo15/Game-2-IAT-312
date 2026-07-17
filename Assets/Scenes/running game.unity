@@ -5944,6 +5944,10 @@ MonoBehaviour:
   choicePanel: {fileID: 721784529}
   promptText1: {fileID: 1814642505}
   promptText2: {fileID: 688242082}
+  promptText3: {fileID: 0}
+  promptText4: {fileID: 0}
+  promptText5: {fileID: 0}
+  promptText6: {fileID: 0}
   mapDisplayDuration: 2
 --- !u!224 &721784531
 RectTransform:
@@ -12007,11 +12011,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   introActive: 1
   introDuration: 2
+  autoDriveToPosition: 0
+  autoDriveTarget: {x: 0, y: 0}
+  autoDriveStopDistance: 0.05
   speed: 4
   lateralSpeed: 2
   accel: 2
   horizontalForward: 0
   lockLateralMovement: 0
+  directLeftRight: 0
   stopAtX: 5.6
   lowFuelUI: {fileID: 0}
   player: {fileID: 0}
@@ -12022,6 +12030,9 @@ MonoBehaviour:
   beerClip: {fileID: 8300000, guid: d24ccacf3028ad14d912d1b8b9ce2fb8, type: 3}
   crashClip: {fileID: 0}
   carCrash: {fileID: 1571349374}
+  fuelBipSound: {fileID: 0}
+  fuelBipClip: {fileID: 0}
+  spotLight: {fileID: 0}
   minVolume: 0.1
   maxVolume: 1
   minPitch: 0.8
@@ -12029,6 +12040,8 @@ MonoBehaviour:
   fade: {fileID: 858989900}
   stopped: 0
   cameraTransform: {fileID: 569665803}
+  cameraFollowOffset: {x: 0, y: 11.75}
+  cameraFollowSmoothTime: 1
   sceneName: Scene 3
 --- !u!4 &1574804692
 Transform:

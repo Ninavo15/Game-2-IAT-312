@@ -56,5 +56,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Game Scene/Ending 2 (DIE).unity
     guid: 1b0c56689c2ba417e8a9c2e11e8aa636
+  - enabled: 1
+    path: Assets/Scenes/Ending official/Fall Transition.unity
+    guid: bf6327fb27c2f5b44bff841414de2cf6
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
