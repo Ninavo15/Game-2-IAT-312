@@ -1036,7 +1036,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0.9}
@@ -1815,7 +1815,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0.9}
@@ -1988,7 +1988,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 30
+  m_Text: 20
 --- !u!222 &1806947770
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2026,7 +2026,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51f7a017da2784e588f667d005ec0bde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GasPumpMiniGame
-  countdownOverlay: {fileID: 1670897235}
+  introOverlay: {fileID: 1670897235}
   resultOverlay: {fileID: 1610037478}
   resultTitleText: {fileID: 1135198728}
   resultSubtitleText: {fileID: 1092306060}
@@ -2050,7 +2050,6 @@ MonoBehaviour:
   holdPromptText: {fileID: 0}
   holdPromptIdleColor: {r: 1, g: 1, b: 1, a: 0.55}
   holdPromptActiveColor: {r: 1, g: 0.85, b: 0.2, a: 1}
-  countdownStepDuration: 1
   resultHoldTime: 2.5
   borderThickness: 4
   borderColor: {r: 0, g: 0, b: 0, a: 1}
