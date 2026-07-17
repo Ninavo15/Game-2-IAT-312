@@ -122,8 +122,9 @@ public class mirrorScript : MonoBehaviour
             t--;
         }
         countdownText.text = "TOO LATE";
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(2f);
         countdownText.gameObject.SetActive(false);
+        SceneManager.LoadScene("Capture Ending");
 
     }
     IEnumerator startScare()
@@ -195,9 +196,9 @@ public class mirrorScript : MonoBehaviour
     {
         switch (item)
         {
-            case "bleach": return "BleachEnding";
-            case "scissor": return "ScissorEnding";
-            case "wrench": return "WrenchEnding";
+            case "bleach": return "dialoguePolice";
+            case "scissor": return "dialoguePolice";
+            case "wrench": return "running game";
             default: return "";
         }
     }

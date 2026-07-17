@@ -298,7 +298,7 @@ public class CarMovement : MonoBehaviour
             stopped = true;
             crashed = true;
             carCrash.Play();
-            StartCoroutine(FadeAndLoad("Ending 1 (CAPTURE)"));
+            StartCoroutine(FadeAndLoad("Capture Ending"));
         }
     }
     IEnumerator FadeAndLoad(string sceneName)
