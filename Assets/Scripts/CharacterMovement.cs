@@ -34,6 +34,23 @@ public class CharacterMovement : MonoBehaviour
 
     }
 
+    void Start()
+    {
+        if (GlobalStore.returnedFromSelection)
+        {
+            GlobalStore.returnedFromSelection = false; // consume - don't affect a later fresh visit
+            rb.position = GlobalStore.selectionReturnPosition;
+        }
+    }
+
+    // Called right before leaving for the convenience store's item-selection
+    // mini-game, so Start() can drop the player back at the same spot on return.
+    public void RecordSelectionReturnPosition()
+    {
+        GlobalStore.returnedFromSelection = true;
+        GlobalStore.selectionReturnPosition = rb.position;
+    }
+
     void OnEnable()
     {
         rawInput = Vector2.zero;
@@ -80,9 +97,6 @@ public class CharacterMovement : MonoBehaviour
             }
         }
     }
-
-
-    
 
     void UpdateSprite(Vector2 moveInput)
     {
