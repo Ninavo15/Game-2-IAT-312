@@ -7,11 +7,15 @@ public class Interactable : MonoBehaviour
     public GameObject promptText;
     public UnityEvent onInteract;
 
+    [Tooltip("Show the prompt immediately if the player is returning from a mini-game (e.g. the convenience store's item-selection scene) - a teleport straight back into this trigger doesn't reliably fire a trigger event on the same frame.")]
+    public bool showPromptIfReturnedFromSelection = false;
+
     bool playerInRange = false;
 
     void Awake()
     {
         if (promptText != null) promptText.SetActive(false);
+        if (showPromptIfReturnedFromSelection && GlobalStore.returnedFromSelection) playerInRange = true;
     }
 
     void OnDisable()
