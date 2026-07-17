@@ -13,4 +13,6 @@ public static class GlobalStore
     // the scene's default start position.
     public static bool returnedFromSelection = false;
     public static Vector2 selectionReturnPosition;
+
+    public static bool gasFilled = false;
 }
