@@ -3,7 +3,7 @@ using UnityEngine;
 public static class GlobalStore
 {
     public static bool scissorPick = false;
-    public static bool bleachPick = false;
+    public static bool bleachPick = true;
     public static bool wrenchPick = false;
     public static bool bloodWiped = false;
 
@@ -13,4 +13,6 @@ public static class GlobalStore
     // the scene's default start position.
     public static bool returnedFromSelection = false;
     public static Vector2 selectionReturnPosition;
+
+    public static bool gasFilled = false;
 }
