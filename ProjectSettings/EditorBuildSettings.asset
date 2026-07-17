@@ -65,5 +65,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/dialoguePolice.unity
     guid: b0cf2a7120615bb40a957cf54bbd3338
+  - enabled: 1
+    path: Assets/Scenes/Ending official/Caught by worker.unity
+    guid: 4db66331260a44d4d83d0d309d887441
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
