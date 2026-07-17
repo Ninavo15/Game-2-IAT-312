@@ -64,6 +64,10 @@ public class CarEntryInteraction : MonoBehaviour
         if (player != null) player.SetActive(false);
         if (carMovement != null) carMovement.enabled = false;
 
+        // Start fading to black as soon as the car starts moving, not after
+        // it stops - the drive and the fade run at the same time.
+        fade.FadeOut();
+
         float elapsed = 0f;
         while (elapsed < driveAwayDuration)
         {
@@ -72,8 +76,11 @@ public class CarEntryInteraction : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
 
-        fade.FadeOut();
-        yield return new WaitForSeconds(fade.fadeDuration);
+        // If the fade takes longer than the drive, wait out the rest of it
+        // before loading so the screen is fully black first.
+        float remainingFadeTime = fade.fadeDuration - driveAwayDuration;
+        if (remainingFadeTime > 0f) yield return new WaitForSeconds(remainingFadeTime);
+
         SceneManager.LoadScene(transitionScene);
     }
 }

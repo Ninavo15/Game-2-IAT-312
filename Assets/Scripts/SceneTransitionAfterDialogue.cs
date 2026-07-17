@@ -19,11 +19,15 @@ public class SceneTransitionAfterDialogue : MonoBehaviour
 
     IEnumerator Sequence(string line)
     {
-        float revealTime = line.Length / Mathf.Max(dialogue.charactersPerSecond, 1f);
-        float holdTime = Mathf.Max(0f, totalDisplayDuration - revealTime);
-        dialogue.ShowLine(line, holdTime);
+        // dialogue is optional - scenes with no dialogue box just fade straight through.
+        if (dialogue != null)
+        {
+            float revealTime = line.Length / Mathf.Max(dialogue.charactersPerSecond, 1f);
+            float holdTime = Mathf.Max(0f, totalDisplayDuration - revealTime);
+            dialogue.ShowLine(line, holdTime);
 
-        yield return new WaitForSeconds(totalDisplayDuration);
+            yield return new WaitForSeconds(totalDisplayDuration);
+        }
 
         fade.FadeOut();
         yield return new WaitForSeconds(fade.fadeDuration);
