@@ -330,7 +330,7 @@ Transform:
   m_GameObject: {fileID: 290872796}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -33.203804, y: -70.11498, z: 0}
+  m_LocalPosition: {x: -33.333, y: -70.11498, z: 0}
   m_LocalScale: {x: 0.022215288, y: 0.022215288, z: 0.022215288}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -382,6 +382,40 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 15.561328, y: 21.327324}
   m_EdgeRadius: 0
+--- !u!114 &300000301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1959192930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ca4d1876e4244c68b52a6d38f3eaddf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &300000401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 142649906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04a6abb414784bc38d0da01cb68c603d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue: {fileID: 900000031}
+  player: {fileID: 700000016}
+  fade: {fileID: 555000007}
+  carMovement: {fileID: 700000006}
+  needBothLine: I need to pump some gas and buy some stuffs
+  needGasLine: I need some gas
+  needItemLine: I need to buy some stuffs from convenience store
+  transitionScene: Transition SIde
+  driveAwaySpeed: 8
+  driveAwayDuration: 2
 --- !u!1 &466064610
 GameObject:
   m_ObjectHideFlags: 0
@@ -1188,29 +1222,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 1823663872}
   cameraFollowOffset: {x: -3.25, y: 0.25976}
   cameraFollowSmoothTime: 1.5
-  sceneName:
---- !u!114 &300000401
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 142649906}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04a6abb414784bc38d0da01cb68c603d, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
-  dialogue: {fileID: 900000031}
-  player: {fileID: 700000016}
-  fade: {fileID: 555000007}
-  carMovement: {fileID: 700000006}
-  needBothLine: I need to pump some gas and buy some stuffs
-  needGasLine: I need some gas
-  needItemLine: I need to buy some stuffs from convenience store
-  transitionScene: Transition SIde
-  driveAwaySpeed: 8
-  driveAwayDuration: 2
+  sceneName: 
 --- !u!1 &700000007
 GameObject:
   m_ObjectHideFlags: 0
@@ -1904,6 +1916,8 @@ MonoBehaviour:
           m_StringArgument: Oh no !!! There's blood on my car
           m_BoolArgument: 0
         m_CallState: 2
+  showPromptIfReturnedFromSelection: 0
+  oneShot: 1
 --- !u!114 &900000031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1920,6 +1934,8 @@ MonoBehaviour:
   dialogueText: {fileID: 1985401783}
   displayDuration: 2.5
   charactersPerSecond: 30
+  introLine: 
+  introDelay: 0.5
 --- !u!114 &900000032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2208,6 +2224,8 @@ MonoBehaviour:
           m_StringArgument: IT'S THAT GIRL! I need to rip it
           m_BoolArgument: 0
         m_CallState: 2
+  showPromptIfReturnedFromSelection: 0
+  oneShot: 1
 --- !u!114 &950000108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2426,8 +2444,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aeae30d7687044f88f9ca33d20a41e95, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   promptLabel: {fileID: 900000004}
   enterCarPromptText: Press E to Enter the Car
   carEntry: {fileID: 300000401}
@@ -2732,18 +2750,8 @@ MonoBehaviour:
           m_StringArgument: I need to pump some gas first
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &300000301
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1959192930}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ca4d1876e4244c68b52a6d38f3eaddf, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  showPromptIfReturnedFromSelection: 0
+  oneShot: 1
 --- !u!1 &950000240
 GameObject:
   m_ObjectHideFlags: 0
@@ -2848,7 +2856,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument:
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 950000249}
@@ -2863,6 +2871,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  showPromptIfReturnedFromSelection: 0
+  oneShot: 1
 --- !u!1 &950000244
 GameObject:
   m_ObjectHideFlags: 0
